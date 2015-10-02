@@ -11,73 +11,99 @@ public final class R {
     public static final class attr {
     }
     public static final class dimen {
-        public static final int activity_horizontal_margin=0x7f060000;
-        public static final int activity_vertical_margin=0x7f060001;
+        public static final int activity_horizontal_margin=0x7f070000;
+        public static final int activity_vertical_margin=0x7f070001;
     }
     public static final class drawable {
         public static final int hangman=0x7f020000;
     }
     public static final class id {
-        public static final int action_settings=0x7f09000b;
-        public static final int animation=0x7f090003;
-        public static final int hint=0x7f090002;
-        public static final int key1Layout=0x7f090005;
-        public static final int keyE=0x7f090008;
-        public static final int keyQ=0x7f090006;
-        public static final int keyR=0x7f090009;
-        public static final int keyT=0x7f09000a;
-        public static final int keyW=0x7f090007;
-        public static final int mainLayout=0x7f090000;
-        public static final int question=0x7f090001;
-        public static final int subLayout=0x7f090004;
+        public static final int action_settings=0x7f0a0022;
+        public static final int animation=0x7f0a0003;
+        public static final int hint=0x7f0a0002;
+        public static final int key1Layout=0x7f0a0005;
+        public static final int key2Layout=0x7f0a0010;
+        public static final int key3Layout=0x7f0a001a;
+        public static final int keyA=0x7f0a0011;
+        public static final int keyB=0x7f0a001f;
+        public static final int keyC=0x7f0a001d;
+        public static final int keyD=0x7f0a0013;
+        public static final int keyE=0x7f0a0008;
+        public static final int keyF=0x7f0a0014;
+        public static final int keyG=0x7f0a0015;
+        public static final int keyH=0x7f0a0016;
+        public static final int keyI=0x7f0a000d;
+        public static final int keyJ=0x7f0a0017;
+        public static final int keyK=0x7f0a0018;
+        public static final int keyL=0x7f0a0019;
+        public static final int keyM=0x7f0a0021;
+        public static final int keyN=0x7f0a0020;
+        public static final int keyO=0x7f0a000e;
+        public static final int keyP=0x7f0a000f;
+        public static final int keyQ=0x7f0a0006;
+        public static final int keyR=0x7f0a0009;
+        public static final int keyS=0x7f0a0012;
+        public static final int keyT=0x7f0a000a;
+        public static final int keyU=0x7f0a000c;
+        public static final int keyV=0x7f0a001e;
+        public static final int keyW=0x7f0a0007;
+        public static final int keyX=0x7f0a001c;
+        public static final int keyY=0x7f0a000b;
+        public static final int keyZ=0x7f0a001b;
+        public static final int mainLayout=0x7f0a0000;
+        public static final int question=0x7f0a0001;
+        public static final int subLayout=0x7f0a0004;
     }
     public static final class layout {
         public static final int activity_main=0x7f040000;
     }
     public static final class menu {
-        public static final int menu_main=0x7f080000;
+        public static final int menu_main=0x7f090000;
     }
     public static final class mipmap {
         public static final int ic_launcher=0x7f030000;
     }
+    public static final class raw {
+        public static final int kids=0x7f050000;
+    }
     public static final class string {
-        public static final int action_settings=0x7f070000;
-        public static final int animation=0x7f070001;
-        public static final int app_name=0x7f070002;
-        public static final int hello_world=0x7f070003;
-        public static final int hint=0x7f070004;
-        public static final int keyboard=0x7f070005;
-        public static final int keyboardA=0x7f070006;
-        public static final int keyboardB=0x7f070007;
-        public static final int keyboardC=0x7f070008;
-        public static final int keyboardD=0x7f070009;
-        public static final int keyboardE=0x7f07000a;
-        public static final int keyboardF=0x7f07000b;
-        public static final int keyboardG=0x7f07000c;
-        public static final int keyboardH=0x7f07000d;
-        public static final int keyboardI=0x7f07000e;
-        public static final int keyboardJ=0x7f07000f;
-        public static final int keyboardK=0x7f070010;
-        public static final int keyboardL=0x7f070011;
-        public static final int keyboardM=0x7f070012;
-        public static final int keyboardN=0x7f070013;
-        public static final int keyboardO=0x7f070014;
-        public static final int keyboardP=0x7f070015;
-        public static final int keyboardQ=0x7f070016;
-        public static final int keyboardR=0x7f070017;
-        public static final int keyboardS=0x7f070018;
-        public static final int keyboardT=0x7f070019;
-        public static final int keyboardU=0x7f07001a;
-        public static final int keyboardV=0x7f07001b;
-        public static final int keyboardW=0x7f07001c;
-        public static final int keyboardX=0x7f07001d;
-        public static final int keyboardY=0x7f07001e;
-        public static final int keyboardZ=0x7f07001f;
-        public static final int question=0x7f070020;
+        public static final int action_settings=0x7f080000;
+        public static final int animation=0x7f080001;
+        public static final int app_name=0x7f080002;
+        public static final int hello_world=0x7f080003;
+        public static final int hint=0x7f080004;
+        public static final int keyboard=0x7f080005;
+        public static final int keyboardA=0x7f080006;
+        public static final int keyboardB=0x7f080007;
+        public static final int keyboardC=0x7f080008;
+        public static final int keyboardD=0x7f080009;
+        public static final int keyboardE=0x7f08000a;
+        public static final int keyboardF=0x7f08000b;
+        public static final int keyboardG=0x7f08000c;
+        public static final int keyboardH=0x7f08000d;
+        public static final int keyboardI=0x7f08000e;
+        public static final int keyboardJ=0x7f08000f;
+        public static final int keyboardK=0x7f080010;
+        public static final int keyboardL=0x7f080011;
+        public static final int keyboardM=0x7f080012;
+        public static final int keyboardN=0x7f080013;
+        public static final int keyboardO=0x7f080014;
+        public static final int keyboardP=0x7f080015;
+        public static final int keyboardQ=0x7f080016;
+        public static final int keyboardR=0x7f080017;
+        public static final int keyboardS=0x7f080018;
+        public static final int keyboardT=0x7f080019;
+        public static final int keyboardU=0x7f08001a;
+        public static final int keyboardV=0x7f08001b;
+        public static final int keyboardW=0x7f08001c;
+        public static final int keyboardX=0x7f08001d;
+        public static final int keyboardY=0x7f08001e;
+        public static final int keyboardZ=0x7f08001f;
+        public static final int question=0x7f080020;
     }
     public static final class style {
         /**  Customize your theme here. 
          */
-        public static final int AppTheme=0x7f050000;
+        public static final int AppTheme=0x7f060000;
     }
 }

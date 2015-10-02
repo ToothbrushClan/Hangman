@@ -4,13 +4,29 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
-public class MainActivity extends Activity {
+import com.toothbrushclan.hangman.categories.Category;
+import com.toothbrushclan.hangman.categories.Kids;
+
+public class MainActivity extends Activity implements View.OnClickListener {
+
+    TextView question;
+    TextView hint;
+    Button buttonQ;
+    Category category;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        question = (TextView) findViewById(R.id.question);
+        hint = (TextView) findViewById(R.id.hint);
+        buttonQ = (Button) findViewById(R.id.keyQ);
+        buttonQ.setOnClickListener(this);
+        category = new Kids(super.getApplicationContext());
     }
 
     @Override
@@ -33,5 +49,18 @@ public class MainActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View v) {
+        String questionLine = category.getNextQuestion();
+        if (questionLine == null ) {
+            question.setText("question");
+            hint.setText("hint");
+        } else {
+            String[] strQuestion =  questionLine.split(";");
+            question.setText(strQuestion[0]);
+            hint.setText(strQuestion[1]);
+        }
     }
 }
