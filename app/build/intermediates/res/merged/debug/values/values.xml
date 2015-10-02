@@ -7,8 +7,38 @@
     <!-- From: file:/Users/ushaikh/Personal/Projects/Hangman/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="action_settings">Settings</string>
+    <string name="animation">Animation</string>
     <string name="app_name">Hangman</string>
     <string name="hello_world">Hello world!</string>
+    <string name="hint">Default Hint!</string>
+    <string name="keyboard">Keyboard Comes Here</string>
+    <string name="keyboardA">A</string>
+    <string name="keyboardB">B</string>
+    <string name="keyboardC">C</string>
+    <string name="keyboardD">D</string>
+    <string name="keyboardE">E</string>
+    <string name="keyboardF">F</string>
+    <string name="keyboardG">G</string>
+    <string name="keyboardH">H</string>
+    <string name="keyboardI">I</string>
+    <string name="keyboardJ">J</string>
+    <string name="keyboardK">K</string>
+    <string name="keyboardL">L</string>
+    <string name="keyboardM">M</string>
+    <string name="keyboardN">N</string>
+    <string name="keyboardO">O</string>
+    <string name="keyboardP">P</string>
+    <string name="keyboardQ">Q</string>
+    <string name="keyboardR">R</string>
+    <string name="keyboardS">S</string>
+    <string name="keyboardT">T</string>
+    <string name="keyboardU">U</string>
+    <string name="keyboardV">V</string>
+    <string name="keyboardW">W</string>
+    <string name="keyboardX">X</string>
+    <string name="keyboardY">Y</string>
+    <string name="keyboardZ">Z</string>
+    <string name="question">_ _ _</string>
     <!-- From: file:/Users/ushaikh/Personal/Projects/Hangman/app/src/main/res/values/styles.xml -->
     <eat-comment/>
     <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
