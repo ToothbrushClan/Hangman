@@ -59,7 +59,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
             hint.setText("hint");
         } else {
             String[] strQuestion =  questionLine.split(";");
-            question.setText(strQuestion[0]);
+            String guess = strQuestion[0];
+            String displayQuestion = guess.replaceAll("[^\\s]","_ ");
+            question.setText(displayQuestion);
             hint.setText(strQuestion[1]);
         }
     }
