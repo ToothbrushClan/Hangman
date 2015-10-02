@@ -38,7 +38,7 @@
 
         <LinearLayout
             android:orientation="vertical"
-            android:layout_weight="3"
+            android:layout_weight="2"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -54,45 +54,212 @@
                 android:layout_alignParentStart="true"
                 android:id="@+id/key1Layout">
 
+
                 <Button
                     android:id="@+id/keyQ"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_gravity="left"
+                    android:layout_gravity="center"
                     android:text="@string/keyboardQ"/>
                 <Button
                     android:id="@+id/keyW"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_gravity="left"
+                    android:layout_gravity="center"
                     android:text="@string/keyboardW"/>
                 <Button
                     android:id="@+id/keyE"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_gravity="left"
+                    android:layout_gravity="center"
                     android:text="@string/keyboardE"/>
                 <Button
                     android:id="@+id/keyR"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_gravity="left"
+                    android:layout_gravity="center"
                     android:text="@string/keyboardR"/>
                 <Button
                     android:id="@+id/keyT"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_gravity="left"
+                    android:layout_gravity="center"
                     android:text="@string/keyboardT"/>
+                <Button
+                    android:id="@+id/keyY"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:text="@string/keyboardY"/>
+                <Button
+                    android:id="@+id/keyU"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:text="@string/keyboardU"/>
+                <Button
+                    android:id="@+id/keyI"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:text="@string/keyboardI"/>
+                <Button
+                    android:id="@+id/keyO"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:text="@string/keyboardO"/>
+                <Button
+                    android:id="@+id/keyP"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:text="@string/keyboardP"/>
             </LinearLayout>
 
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:id="@+id/key2Layout">
 
+                <Button
+                    android:id="@+id/keyA"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:text="@string/keyboardA"/>
+                <Button
+                    android:id="@+id/keyS"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:text="@string/keyboardS"/>
+                <Button
+                    android:id="@+id/keyD"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:text="@string/keyboardD"/>
+                <Button
+                    android:id="@+id/keyF"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:text="@string/keyboardF"/>
+                <Button
+                    android:id="@+id/keyG"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:text="@string/keyboardG"/>
+                <Button
+                    android:id="@+id/keyH"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:text="@string/keyboardH"/>
+                <Button
+                    android:id="@+id/keyJ"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:text="@string/keyboardJ"/>
+                <Button
+                    android:id="@+id/keyK"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:text="@string/keyboardK"/>
+                <Button
+                    android:id="@+id/keyL"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:text="@string/keyboardL"/>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:id="@+id/key3Layout">
 
+                <Button
+                    android:id="@+id/keyZ"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:text="@string/keyboardZ"/>
+                <Button
+                    android:id="@+id/keyX"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:text="@string/keyboardX"/>
+                <Button
+                    android:id="@+id/keyC"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:text="@string/keyboardC"/>
+                <Button
+                    android:id="@+id/keyV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:text="@string/keyboardV"/>
+                <Button
+                    android:id="@+id/keyB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:text="@string/keyboardB"/>
+                <Button
+                    android:id="@+id/keyN"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:text="@string/keyboardN"/>
+                <Button
+                    android:id="@+id/keyM"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:text="@string/keyboardM"/>
+
+            </LinearLayout>
 
         </LinearLayout>
 
