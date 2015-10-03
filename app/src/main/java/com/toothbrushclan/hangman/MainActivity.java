@@ -4,12 +4,15 @@ import android.app.Activity;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.RippleDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.toothbrushclan.hangman.categories.Category;
@@ -46,6 +49,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
     Button buttonX;
     Button buttonY;
     Button buttonZ;
+    Button nextQuestion;
+    ImageView hangmanImage;
     Category category;
     String question;
     String hint;
@@ -55,6 +60,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
     int maxTryCount = 8;
     int tryCount = 0;
     QuestionValidator questionValidator;
+    int defaultTextColor;
+    Drawable defaultButtonDrawable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,25 +69,36 @@ public class MainActivity extends Activity implements View.OnClickListener {
         setContentView(R.layout.activity_main);
         textViewQuestion = (TextView) findViewById(R.id.question);
         textViewHint = (TextView) findViewById(R.id.hint);
+        hangmanImage = (ImageView) findViewById(R.id.animation);
+        defaultTextColor = textViewQuestion.getTextColors().getDefaultColor();
         findAndInitializeButtons();
         category = new Kids(super.getApplicationContext());
         questionValidator = new QuestionValidator();
+        getNextQuestion();
+    }
+
+    private void getNextQuestion() {
+        tryCount = 0;
         regex = baseRegex;
         String questionLine = category.getNextQuestion();
         if (questionLine == null ) {
-            textViewQuestion.setText("question");
-            textViewHint.setText("hint");
+            question = "QUESTION";
+            hint = "hint";
         } else {
             String[] strQuestion =  questionLine.split(";");
-            question = strQuestion[0];
+            question = strQuestion[0].toUpperCase();
             hint = strQuestion[1];
-            maskedQuestion = questionValidator.getMaskedQuestion(question, regex);
-            textViewQuestion.setText(maskedQuestion);
-            textViewHint.setText(hint);
         }
+        hangmanImage.setImageResource(R.drawable.hangman1);
+        maskedQuestion = questionValidator.getMaskedQuestion(question, regex);
+        textViewQuestion.setText(maskedQuestion);
+        textViewHint.setText(hint);
     }
 
     private void findAndInitializeButtons() {
+        nextQuestion = (Button) findViewById(R.id.nextQuestion);
+        nextQuestion.setOnClickListener(this);
+        defaultButtonDrawable = nextQuestion.getBackground();
         buttonA = (Button) findViewById(R.id.keyA);
         buttonB = (Button) findViewById(R.id.keyB);
         buttonC = (Button) findViewById(R.id.keyC);
@@ -159,37 +177,68 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        // Log.i("View toString: ", v.toString());
-        Button buttonTemp = (Button) v;
-        String selectedChar = (String) buttonTemp.getText();
-        if (questionValidator.isCharacterPresent(selectedChar, question)) {
-            regex = questionValidator.updateRegex(selectedChar, regex);
-            maskedQuestion = questionValidator.getMaskedQuestion(question, regex);
-            textViewQuestion.setText(maskedQuestion);
-            buttonTemp.setTextColor(Color.GREEN);
-            if (questionValidator.isQuestionComplete(maskedQuestion)) {
-                textViewHint.setText("CONGRATULATIONS!!!");
-                disableAllKeys();
-            }
-        } else {
-            buttonTemp.setTextColor(Color.RED);
-            tryCount++;
-            if (tryCount == maxTryCount) {
-                textViewHint.setText("FAIL!!! :(");
-                disableAllKeys();
-            }
+        switch(v.getId())  //get the id of the view clicked. (in this case button)
+        {
+            case R.id.nextQuestion :
+                enableAllKeys();
+                getNextQuestion();
+                break;
+            default:
+                Button buttonTemp = (Button) v;
+                String selectedChar = (String) buttonTemp.getText();
+                if (questionValidator.isCharacterPresent(selectedChar, question)) {
+                    regex = questionValidator.updateRegex(selectedChar, regex);
+                    maskedQuestion = questionValidator.getMaskedQuestion(question, regex);
+                    textViewQuestion.setText(maskedQuestion);
+                    buttonTemp.setTextColor(Color.GREEN);
+                    if (questionValidator.isQuestionComplete(maskedQuestion)) {
+                        textViewHint.setText("CONGRATULATIONS!!!");
+                        disableAllKeys();
+                    }
+                } else {
+                    buttonTemp.setTextColor(Color.RED);
+                    tryCount++;
+                    switch (tryCount) {
+                        case 0 :
+                            hangmanImage.setImageResource(R.drawable.hangman1);
+                            break;
+                        case 1 :
+                            hangmanImage.setImageResource(R.drawable.hangman2);
+                            break;
+                        case 2 :
+                            hangmanImage.setImageResource(R.drawable.hangman3);
+                            break;
+                        case 3 :
+                            hangmanImage.setImageResource(R.drawable.hangman4);
+                            break;
+                        case 4 :
+                            hangmanImage.setImageResource(R.drawable.hangman5);
+                            break;
+                        case 5 :
+                            hangmanImage.setImageResource(R.drawable.hangman6);
+                            break;
+                        case 6 :
+                            hangmanImage.setImageResource(R.drawable.hangman7);
+                            break;
+                        case 7 :
+                            hangmanImage.setImageResource(R.drawable.hangman8);
+                            break;
+                        case 8 :
+                            hangmanImage.setImageResource(R.drawable.hangman9);
+                            break;
+                        default :
+                            hangmanImage.setImageResource(R.drawable.hangman9);
+                    }
+                    if (tryCount == maxTryCount) {
+                        textViewQuestion.setText(question);
+                        textViewHint.setText("FAIL!!! :(");
+                        disableAllKeys();
+                    }
+                }
+
+                buttonTemp.setBackgroundColor(Color.TRANSPARENT);
+                buttonTemp.setEnabled(false);
         }
-
-        buttonTemp.setBackgroundColor(Color.TRANSPARENT);
-        buttonTemp.setEnabled(false);
-
-        // Log.i("View Text: ", (String) getText(v.getId()));
-
-        // Log.i("View Text: ",v.get);
-//        if (v.getAccessibilityClassName().equals("android.widget.Button")) {
-//
-//        }
-
     }
 
     private void enableAllKeys() {
@@ -219,6 +268,58 @@ public class MainActivity extends Activity implements View.OnClickListener {
         buttonX.setEnabled(true);
         buttonY.setEnabled(true);
         buttonZ.setEnabled(true);
+        buttonA.setBackground(defaultButtonDrawable);
+        buttonB.setBackground(defaultButtonDrawable);
+        buttonC.setBackground(defaultButtonDrawable);
+        buttonD.setBackground(defaultButtonDrawable);
+        buttonE.setBackground(defaultButtonDrawable);
+        buttonF.setBackground(defaultButtonDrawable);
+        buttonG.setBackground(defaultButtonDrawable);
+        buttonH.setBackground(defaultButtonDrawable);
+        buttonI.setBackground(defaultButtonDrawable);
+        buttonJ.setBackground(defaultButtonDrawable);
+        buttonK.setBackground(defaultButtonDrawable);
+        buttonL.setBackground(defaultButtonDrawable);
+        buttonM.setBackground(defaultButtonDrawable);
+        buttonN.setBackground(defaultButtonDrawable);
+        buttonO.setBackground(defaultButtonDrawable);
+        buttonP.setBackground(defaultButtonDrawable);
+        buttonQ.setBackground(defaultButtonDrawable);
+        buttonR.setBackground(defaultButtonDrawable);
+        buttonS.setBackground(defaultButtonDrawable);
+        buttonT.setBackground(defaultButtonDrawable);
+        buttonU.setBackground(defaultButtonDrawable);
+        buttonV.setBackground(defaultButtonDrawable);
+        buttonW.setBackground(defaultButtonDrawable);
+        buttonX.setBackground(defaultButtonDrawable);
+        buttonY.setBackground(defaultButtonDrawable);
+        buttonZ.setBackground(defaultButtonDrawable);
+        buttonA.setTextColor(defaultTextColor);
+        buttonB.setTextColor(defaultTextColor);
+        buttonC.setTextColor(defaultTextColor);
+        buttonD.setTextColor(defaultTextColor);
+        buttonE.setTextColor(defaultTextColor);
+        buttonF.setTextColor(defaultTextColor);
+        buttonG.setTextColor(defaultTextColor);
+        buttonH.setTextColor(defaultTextColor);
+        buttonI.setTextColor(defaultTextColor);
+        buttonJ.setTextColor(defaultTextColor);
+        buttonK.setTextColor(defaultTextColor);
+        buttonL.setTextColor(defaultTextColor);
+        buttonM.setTextColor(defaultTextColor);
+        buttonN.setTextColor(defaultTextColor);
+        buttonO.setTextColor(defaultTextColor);
+        buttonP.setTextColor(defaultTextColor);
+        buttonQ.setTextColor(defaultTextColor);
+        buttonR.setTextColor(defaultTextColor);
+        buttonS.setTextColor(defaultTextColor);
+        buttonT.setTextColor(defaultTextColor);
+        buttonU.setTextColor(defaultTextColor);
+        buttonV.setTextColor(defaultTextColor);
+        buttonW.setTextColor(defaultTextColor);
+        buttonX.setTextColor(defaultTextColor);
+        buttonY.setTextColor(defaultTextColor);
+        buttonZ.setTextColor(defaultTextColor);
     }
     private void disableAllKeys() {
         buttonA.setEnabled(false);

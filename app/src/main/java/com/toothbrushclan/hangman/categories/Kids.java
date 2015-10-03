@@ -37,8 +37,10 @@ public class Kids extends Category {
         if (iterator.hasNext()) {
             questionLine = iterator.next();
             iterator.remove();
+        } else {
+            return null;
         }
-        return questionLine.toUpperCase();
+        return questionLine;
     }
 
     protected void readFile() {
@@ -57,26 +59,6 @@ public class Kids extends Category {
             System.out.println(e.getMessage());
             e.printStackTrace();
         }
-
-//        try {
-//
-//            String sCurrentLine;
-//
-//            br = new BufferedReader(new FileReader("raw/kids"));
-//
-//            while ((sCurrentLine = br.readLine()) != null) {
-//                System.out.println(sCurrentLine);
-//            }
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } finally {
-//            try {
-//                if (br != null)br.close();
-//            } catch (IOException ex) {
-//                ex.printStackTrace();
-//            }
-//        }
     }
 
 }

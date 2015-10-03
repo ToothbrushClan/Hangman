@@ -16,43 +16,53 @@ public final class R {
     }
     public static final class drawable {
         public static final int hangman=0x7f020000;
+        public static final int hangman1=0x7f020001;
+        public static final int hangman2=0x7f020002;
+        public static final int hangman3=0x7f020003;
+        public static final int hangman4=0x7f020004;
+        public static final int hangman5=0x7f020005;
+        public static final int hangman6=0x7f020006;
+        public static final int hangman7=0x7f020007;
+        public static final int hangman8=0x7f020008;
+        public static final int hangman9=0x7f020009;
     }
     public static final class id {
-        public static final int action_settings=0x7f0a0022;
-        public static final int animation=0x7f0a0003;
+        public static final int action_settings=0x7f0a0023;
+        public static final int animation=0x7f0a0004;
         public static final int hint=0x7f0a0002;
-        public static final int key1Layout=0x7f0a0005;
-        public static final int key2Layout=0x7f0a0010;
-        public static final int key3Layout=0x7f0a001a;
-        public static final int keyA=0x7f0a0011;
-        public static final int keyB=0x7f0a001f;
-        public static final int keyC=0x7f0a001d;
-        public static final int keyD=0x7f0a0013;
-        public static final int keyE=0x7f0a0008;
-        public static final int keyF=0x7f0a0014;
-        public static final int keyG=0x7f0a0015;
-        public static final int keyH=0x7f0a0016;
-        public static final int keyI=0x7f0a000d;
-        public static final int keyJ=0x7f0a0017;
-        public static final int keyK=0x7f0a0018;
-        public static final int keyL=0x7f0a0019;
-        public static final int keyM=0x7f0a0021;
-        public static final int keyN=0x7f0a0020;
-        public static final int keyO=0x7f0a000e;
-        public static final int keyP=0x7f0a000f;
-        public static final int keyQ=0x7f0a0006;
-        public static final int keyR=0x7f0a0009;
-        public static final int keyS=0x7f0a0012;
-        public static final int keyT=0x7f0a000a;
-        public static final int keyU=0x7f0a000c;
-        public static final int keyV=0x7f0a001e;
-        public static final int keyW=0x7f0a0007;
-        public static final int keyX=0x7f0a001c;
-        public static final int keyY=0x7f0a000b;
-        public static final int keyZ=0x7f0a001b;
+        public static final int key1Layout=0x7f0a0006;
+        public static final int key2Layout=0x7f0a0011;
+        public static final int key3Layout=0x7f0a001b;
+        public static final int keyA=0x7f0a0012;
+        public static final int keyB=0x7f0a0020;
+        public static final int keyC=0x7f0a001e;
+        public static final int keyD=0x7f0a0014;
+        public static final int keyE=0x7f0a0009;
+        public static final int keyF=0x7f0a0015;
+        public static final int keyG=0x7f0a0016;
+        public static final int keyH=0x7f0a0017;
+        public static final int keyI=0x7f0a000e;
+        public static final int keyJ=0x7f0a0018;
+        public static final int keyK=0x7f0a0019;
+        public static final int keyL=0x7f0a001a;
+        public static final int keyM=0x7f0a0022;
+        public static final int keyN=0x7f0a0021;
+        public static final int keyO=0x7f0a000f;
+        public static final int keyP=0x7f0a0010;
+        public static final int keyQ=0x7f0a0007;
+        public static final int keyR=0x7f0a000a;
+        public static final int keyS=0x7f0a0013;
+        public static final int keyT=0x7f0a000b;
+        public static final int keyU=0x7f0a000d;
+        public static final int keyV=0x7f0a001f;
+        public static final int keyW=0x7f0a0008;
+        public static final int keyX=0x7f0a001d;
+        public static final int keyY=0x7f0a000c;
+        public static final int keyZ=0x7f0a001c;
         public static final int mainLayout=0x7f0a0000;
+        public static final int nextQuestion=0x7f0a0003;
         public static final int question=0x7f0a0001;
-        public static final int subLayout=0x7f0a0004;
+        public static final int subLayout=0x7f0a0005;
     }
     public static final class layout {
         public static final int activity_main=0x7f040000;
@@ -99,7 +109,8 @@ public final class R {
         public static final int keyboardX=0x7f08001d;
         public static final int keyboardY=0x7f08001e;
         public static final int keyboardZ=0x7f08001f;
-        public static final int question=0x7f080020;
+        public static final int nextQuestion=0x7f080020;
+        public static final int question=0x7f080021;
     }
     public static final class style {
         /**  Customize your theme here. 

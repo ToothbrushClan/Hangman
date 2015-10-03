@@ -38,6 +38,7 @@
     <string name="keyboardX">X</string>
     <string name="keyboardY">Y</string>
     <string name="keyboardZ">Z</string>
+    <string name="nextQuestion">Next Question</string>
     <string name="question">_ _ _</string>
     <!-- From: file:/Users/ushaikh/Personal/Projects/Hangman/app/src/main/res/values/styles.xml -->
     <eat-comment/>

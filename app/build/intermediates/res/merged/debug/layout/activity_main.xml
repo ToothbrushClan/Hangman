@@ -28,13 +28,21 @@
             android:layout_gravity="center"
             android:text="@string/hint"/>
 
+        <Button
+            android:id="@+id/nextQuestion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:text="@string/nextQuestion"/>
+
         <ImageView
             android:id="@+id/animation"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_weight="2"
             android:layout_gravity="center"
-            android:src="@drawable/hangman"/>
+            android:src="@drawable/hangman1"/>
 
         <LinearLayout
             android:orientation="vertical"
