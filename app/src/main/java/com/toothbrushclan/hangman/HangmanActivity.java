@@ -19,11 +19,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.toothbrushclan.hangman.categories.Category;
+import com.toothbrushclan.hangman.utilities.AllDoneDialog;
 import com.toothbrushclan.hangman.utilities.CongratulationsDialog;
 import com.toothbrushclan.hangman.utilities.FailureDialog;
 import com.toothbrushclan.hangman.utilities.QuestionValidator;
 
-public class HangmanActivity extends Activity implements View.OnClickListener, FailureDialog.FailureDialogListener, CongratulationsDialog.CongratulationsDialogListener {
+public class HangmanActivity extends Activity implements View.OnClickListener, FailureDialog.FailureDialogListener, CongratulationsDialog.CongratulationsDialogListener, AllDoneDialog.AllDoneDialogListener {
 
     TextView textViewQuestion;
     TextView textViewHint;
@@ -139,7 +140,8 @@ public class HangmanActivity extends Activity implements View.OnClickListener, F
         String questionLine = category.getNextQuestion();
         if (questionLine == null ) {
             question = "QUESTION";
-            hint = "hint";
+            hint = "Nothing to see here";
+            showAllDoneDialog();
         } else {
             String[] strQuestion =  questionLine.split(";");
             question = strQuestion[0].toUpperCase();
@@ -300,6 +302,11 @@ public class HangmanActivity extends Activity implements View.OnClickListener, F
     private void showCongratulationsDialog() {
         DialogFragment dialog = new CongratulationsDialog();
         dialog.show(getFragmentManager(),"congratulations");
+    }
+
+    private void showAllDoneDialog() {
+        DialogFragment dialog = new AllDoneDialog();
+        dialog.show(getFragmentManager(),"allDone");
     }
 
     private void enableAllKeys() {

@@ -21,7 +21,9 @@
     <string name="categoryCustom2">Custom 2</string>
     <string name="congratulations">Congratulations!</string>
     <string name="failure">Tough Luck!</string>
+    <string name="allDone">All Done!</string>
     <string name="proceedNext">Do you want to go to the next question?</string>
+    <string name="noMoreQuestions">You\'re all done with questions in this category...</string>
     <string name="back">Back</string>
 
 
