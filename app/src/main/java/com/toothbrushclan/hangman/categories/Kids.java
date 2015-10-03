@@ -38,7 +38,7 @@ public class Kids extends Category {
             questionLine = iterator.next();
             iterator.remove();
         }
-        return questionLine;
+        return questionLine.toUpperCase();
     }
 
     protected void readFile() {
