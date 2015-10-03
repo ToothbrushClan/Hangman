@@ -1,6 +1,7 @@
 package com.toothbrushclan.hangman;
 
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -18,9 +19,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.toothbrushclan.hangman.categories.Category;
+import com.toothbrushclan.hangman.utilities.CongratulationsDialog;
+import com.toothbrushclan.hangman.utilities.FailureDialog;
 import com.toothbrushclan.hangman.utilities.QuestionValidator;
 
-public class HangmanActivity extends Activity implements View.OnClickListener {
+public class HangmanActivity extends Activity implements View.OnClickListener, FailureDialog.FailureDialogListener, CongratulationsDialog.CongratulationsDialogListener {
 
     TextView textViewQuestion;
     TextView textViewHint;
@@ -50,7 +53,6 @@ public class HangmanActivity extends Activity implements View.OnClickListener {
     Button buttonX;
     Button buttonY;
     Button buttonZ;
-    Button nextQuestion;
     ImageView hangmanImage;
     Category category;
     String question;
@@ -147,12 +149,10 @@ public class HangmanActivity extends Activity implements View.OnClickListener {
         maskedQuestion = questionValidator.getMaskedQuestion(question, regex);
         textViewQuestion.setText(maskedQuestion);
         textViewHint.setText(hint);
+        enableAllKeys();
     }
 
     private void findAndInitializeButtons() {
-        nextQuestion = (Button) findViewById(R.id.nextQuestion);
-        nextQuestion.setOnClickListener(this);
-        defaultButtonDrawable = nextQuestion.getBackground();
         buttonA = (Button) findViewById(R.id.keyA);
         buttonB = (Button) findViewById(R.id.keyB);
         buttonC = (Button) findViewById(R.id.keyC);
@@ -205,6 +205,7 @@ public class HangmanActivity extends Activity implements View.OnClickListener {
         buttonX.setOnClickListener(this);
         buttonY.setOnClickListener(this);
         buttonZ.setOnClickListener(this);
+        defaultButtonDrawable = buttonA.getBackground();
     }
 
     @Override
@@ -233,10 +234,6 @@ public class HangmanActivity extends Activity implements View.OnClickListener {
     public void onClick(View v) {
         switch(v.getId())  //get the id of the view clicked. (in this case button)
         {
-            case R.id.nextQuestion :
-                enableAllKeys();
-                getNextQuestion();
-                break;
             default:
                 Button buttonTemp = (Button) v;
                 String selectedChar = (String) buttonTemp.getText();
@@ -246,8 +243,8 @@ public class HangmanActivity extends Activity implements View.OnClickListener {
                     textViewQuestion.setText(maskedQuestion);
                     buttonTemp.setTextColor(Color.GREEN);
                     if (questionValidator.isQuestionComplete(maskedQuestion)) {
-                        textViewHint.setText("CONGRATULATIONS!!!");
                         disableAllKeys();
+                        showCongratulationsDialog();
                     }
                 } else {
                     buttonTemp.setTextColor(Color.RED);
@@ -285,14 +282,24 @@ public class HangmanActivity extends Activity implements View.OnClickListener {
                     }
                     if (tryCount == maxTryCount) {
                         textViewQuestion.setText(question);
-                        textViewHint.setText("FAIL!!! :(");
                         disableAllKeys();
+                        showFailureDialog();
                     }
                 }
 
                 buttonTemp.setBackgroundColor(Color.TRANSPARENT);
                 buttonTemp.setEnabled(false);
         }
+    }
+
+    private void showFailureDialog() {
+        DialogFragment dialog = new FailureDialog();
+        dialog.show(getFragmentManager(),"failure");
+    }
+
+    private void showCongratulationsDialog() {
+        DialogFragment dialog = new CongratulationsDialog();
+        dialog.show(getFragmentManager(),"congratulations");
     }
 
     private void enableAllKeys() {
@@ -428,5 +435,15 @@ public class HangmanActivity extends Activity implements View.OnClickListener {
         buttonX.setBackgroundColor(Color.TRANSPARENT);
         buttonY.setBackgroundColor(Color.TRANSPARENT);
         buttonZ.setBackgroundColor(Color.TRANSPARENT);
+    }
+
+    @Override
+    public void onDialogNextClick(DialogFragment dialog) {
+        getNextQuestion();
+    }
+
+    @Override
+    public void onDialogBackClick(DialogFragment dialog) {
+        super.onBackPressed();
     }
 }

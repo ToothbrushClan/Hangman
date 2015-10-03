@@ -33,14 +33,6 @@
             android:textSize="16dp"
             android:text="@string/hint"/>
 
-        <Button
-            android:id="@+id/nextQuestion"
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:text="@string/nextQuestion"/>
-
         <ImageView
             android:id="@+id/animation"
             android:layout_width="wrap_content"
