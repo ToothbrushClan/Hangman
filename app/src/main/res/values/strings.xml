@@ -6,6 +6,21 @@
     <string name="animation">Animation</string>
     <string name="keyboard">Keyboard Comes Here</string>
     <string name="nextQuestion">Next Question</string>
+    <string name="selectCategory">Select a Category: </string>
+    <string name="categoryKids">Kids</string>
+    <string name="categoryCars">Cars</string>
+    <string name="categoryPlaces">Places</string>
+    <string name="categoryHistory">History</string>
+    <string name="categorySpace">Space</string>
+    <string name="categoryAnimals">Animals</string>
+    <string name="categoryPolitics">Politics</string>
+    <string name="categoryFood">Food</string>
+    <string name="categorySports">Sports</string>
+    <string name="categoryDictionary">Dictionary</string>
+    <string name="categoryCustom1">Custom 1</string>
+    <string name="categoryCustom2">Custom 2</string>
+
+
 
 
 

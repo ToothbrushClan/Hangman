@@ -18,10 +18,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.toothbrushclan.hangman.categories.Category;
-import com.toothbrushclan.hangman.categories.Kids;
 import com.toothbrushclan.hangman.utilities.QuestionValidator;
 
-public class MainActivity extends Activity implements View.OnClickListener {
+public class HangmanActivity extends Activity implements View.OnClickListener {
 
     TextView textViewQuestion;
     TextView textViewHint;
@@ -59,6 +58,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     String maskedQuestion;
     String baseRegex = "[^\\s]";
     String regex = "";
+    String categoryType;
     int maxTryCount = 8;
     int tryCount = 0;
     QuestionValidator questionValidator;
@@ -68,17 +68,67 @@ public class MainActivity extends Activity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        // requestWindowFeature(Window.FEATURE_NO_TITLE);
+        // getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
+
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            categoryType = bundle.getString("categoryType");
+        }
+
+        setCategory(categoryType);
+
         textViewQuestion = (TextView) findViewById(R.id.question);
         textViewHint = (TextView) findViewById(R.id.hint);
         hangmanImage = (ImageView) findViewById(R.id.animation);
         defaultTextColor = textViewQuestion.getTextColors().getDefaultColor();
         findAndInitializeButtons();
-        category = new Kids(super.getApplicationContext());
         questionValidator = new QuestionValidator();
         getNextQuestion();
+    }
+
+    private void setCategory(String categoryType) {
+        switch (categoryType) {
+            case "Kids" :
+                category = new Category(super.getApplicationContext(), "raw/kids");
+                break;
+            case "Cars" :
+                category = new Category(super.getApplicationContext(), "raw/cars");
+                break;
+            case "Places" :
+                category = new Category(super.getApplicationContext(), "raw/places");
+                break;
+            case "History" :
+                category = new Category(super.getApplicationContext(), "raw/history");
+                break;
+            case "Space" :
+                category = new Category(super.getApplicationContext(), "raw/space");
+                break;
+            case "Animals" :
+                category = new Category(super.getApplicationContext(), "raw/animals");
+                break;
+            case "Politics" :
+                category = new Category(super.getApplicationContext(), "raw/politics");
+                break;
+            case "Food" :
+                category = new Category(super.getApplicationContext(), "raw/food");
+                break;
+            case "Sports" :
+                category = new Category(super.getApplicationContext(), "raw/sports");
+                break;
+            case "Dictionary" :
+                category = new Category(super.getApplicationContext(), "raw/dictionary");
+                break;
+            case "Custom 1" :
+                category = new Category(super.getApplicationContext(), "raw/custom1");
+                break;
+            case "Custom 2" :
+                category = new Category(super.getApplicationContext(), "raw/custom2");
+                break;
+            default :
+                category = new Category(super.getApplicationContext(), "raw/kids");
+        }
     }
 
     private void getNextQuestion() {

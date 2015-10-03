@@ -9,6 +9,18 @@
     <string name="action_settings">Settings</string>
     <string name="animation">Animation</string>
     <string name="app_name">Hangman</string>
+    <string name="categoryAnimals">Animals</string>
+    <string name="categoryCars">Cars</string>
+    <string name="categoryCustom1">Custom 1</string>
+    <string name="categoryCustom2">Custom 2</string>
+    <string name="categoryDictionary">Dictionary</string>
+    <string name="categoryFood">Food</string>
+    <string name="categoryHistory">History</string>
+    <string name="categoryKids">Kids</string>
+    <string name="categoryPlaces">Places</string>
+    <string name="categoryPolitics">Politics</string>
+    <string name="categorySpace">Space</string>
+    <string name="categorySports">Sports</string>
     <string name="hello_world">Hello world!</string>
     <string name="hint">Default Hint!</string>
     <string name="keyboard">Keyboard Comes Here</string>
@@ -40,6 +52,7 @@
     <string name="keyboardZ">Z</string>
     <string name="nextQuestion">Next Question</string>
     <string name="question">_ _ _</string>
+    <string name="selectCategory">Select a Category: </string>
     <!-- From: file:/Users/ushaikh/Personal/Projects/Hangman/app/src/main/res/values/styles.xml -->
     <eat-comment/>
     <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
