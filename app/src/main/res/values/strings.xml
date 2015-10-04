@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">Hangman</string>
 
+    <string name="playGame">Play Game</string>
+    <string name="aboutUs">About Us</string>
+    <string name="aboutUsDescription">We\'re the Toothbrush Clan\nDon\'t forget to floss</string>
+
     <string name="question">_ _ _</string>
     <string name="hint">Default Hint!</string>
     <string name="animation">Animation</string>

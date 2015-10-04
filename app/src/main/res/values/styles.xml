@@ -3,6 +3,10 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="android:ThemeOverlay.Material.Dark.ActionBar">
         <!-- Customize your theme here. -->
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowTitleSize">0dp</item>
+        <item name="android:windowNoTitle">true</item>
+
     </style>
 
 </resources>

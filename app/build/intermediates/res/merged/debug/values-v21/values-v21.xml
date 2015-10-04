@@ -3,5 +3,8 @@
     <!-- From: file:/Users/ushaikh/Personal/Projects/Hangman/app/src/main/res/values-v21/styles.xml -->
     <eat-comment/>
     <style name="AppTheme" parent="android:Theme.Material.Light">
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowTitleSize">0dp</item>
+        <item name="android:windowNoTitle">true</item>
     </style>
 </resources>
