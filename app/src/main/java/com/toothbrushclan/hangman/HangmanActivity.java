@@ -9,6 +9,7 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.RippleDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,11 +21,12 @@ import android.widget.TextView;
 
 import com.toothbrushclan.hangman.categories.Category;
 import com.toothbrushclan.hangman.utilities.AllDoneDialog;
+import com.toothbrushclan.hangman.utilities.ConfirmationDialog;
 import com.toothbrushclan.hangman.utilities.CongratulationsDialog;
 import com.toothbrushclan.hangman.utilities.FailureDialog;
 import com.toothbrushclan.hangman.utilities.QuestionValidator;
 
-public class HangmanActivity extends Activity implements View.OnClickListener, FailureDialog.FailureDialogListener, CongratulationsDialog.CongratulationsDialogListener, AllDoneDialog.AllDoneDialogListener {
+public class HangmanActivity extends Activity implements View.OnClickListener, FailureDialog.FailureDialogListener, CongratulationsDialog.CongratulationsDialogListener, AllDoneDialog.AllDoneDialogListener, ConfirmationDialog.ConfirmationDialogListener {
 
     TextView textViewQuestion;
     TextView textViewHint;
@@ -210,26 +212,28 @@ public class HangmanActivity extends Activity implements View.OnClickListener, F
         defaultButtonDrawable = buttonA.getBackground();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.menu_main, menu);
+//        return true;
+//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                backKeyHandler();
+                return true;
+//            case R.id.action_settings :
+//                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -239,8 +243,8 @@ public class HangmanActivity extends Activity implements View.OnClickListener, F
             default:
                 Button buttonTemp = (Button) v;
                 String selectedChar = (String) buttonTemp.getText();
+                regex = questionValidator.updateRegex(selectedChar, regex);
                 if (questionValidator.isCharacterPresent(selectedChar, question)) {
-                    regex = questionValidator.updateRegex(selectedChar, regex);
                     maskedQuestion = questionValidator.getMaskedQuestion(question, regex);
                     textViewQuestion.setText(maskedQuestion);
                     buttonTemp.setTextColor(Color.GREEN);
@@ -453,4 +457,37 @@ public class HangmanActivity extends Activity implements View.OnClickListener, F
     public void onDialogBackClick(DialogFragment dialog) {
         super.onBackPressed();
     }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            backKeyHandler();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    private void backKeyHandler() {
+        if ( ! regex.equals(baseRegex)) {
+            showConfirmationDialog();
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    private void showConfirmationDialog() {
+        DialogFragment dialog = new ConfirmationDialog();
+        dialog.show(getFragmentManager(),"confirmation");
+    }
+
+    @Override
+    public void onDialogYesClick(DialogFragment dialog) {
+        super.onBackPressed();
+    }
+
+    @Override
+    public void onDialogNoClick(DialogFragment dialog) {
+        // to
+    }
+
 }

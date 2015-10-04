@@ -25,6 +25,8 @@
     <string name="categorySports">Sports</string>
     <string name="congratulations">Congratulations!</string>
     <string name="failure">Tough Luck!</string>
+    <string name="gameInProgress">Are you sure? A game is in progress...</string>
+    <string name="goBack">Go Back?</string>
     <string name="hello_world">Hello world!</string>
     <string name="hint">Default Hint!</string>
     <string name="keyboard">Keyboard Comes Here</string>
@@ -55,13 +57,15 @@
     <string name="keyboardY">Y</string>
     <string name="keyboardZ">Z</string>
     <string name="nextQuestion">Next Question</string>
+    <string name="no">No</string>
     <string name="noMoreQuestions">You\'re all done with questions in this category...</string>
     <string name="proceedNext">Do you want to go to the next question?</string>
     <string name="question">_ _ _</string>
     <string name="selectCategory">Select a Category: </string>
+    <string name="yes">Yes</string>
     <!-- From: file:/Users/ushaikh/Personal/Projects/Hangman/app/src/main/res/values/styles.xml -->
     <eat-comment/>
-    <style name="AppTheme" parent="android:Theme.Material.Light.DarkActionBar">
+    <style name="AppTheme" parent="android:ThemeOverlay.Material.Dark.ActionBar">
         <!-- Customize your theme here. -->
     </style>
 </resources>

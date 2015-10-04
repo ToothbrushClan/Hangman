@@ -25,6 +25,10 @@
     <string name="proceedNext">Do you want to go to the next question?</string>
     <string name="noMoreQuestions">You\'re all done with questions in this category...</string>
     <string name="back">Back</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="goBack">Go Back?</string>
+    <string name="gameInProgress">Are you sure? A game is in progress...</string>
 
 
 

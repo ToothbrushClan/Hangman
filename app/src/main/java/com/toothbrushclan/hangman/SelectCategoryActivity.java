@@ -31,9 +31,6 @@ public class SelectCategoryActivity extends Activity implements View.OnClickList
         // Tell the activity which XML layout is right
         setContentView(R.layout.activity_select_category);
 
-        // Enable the "Up" button for more navigation options
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-
         buttonKids = (Button) findViewById(R.id.categoryKids);
         buttonCars = (Button) findViewById(R.id.categoryCars);
         buttonPlaces = (Button) findViewById(R.id.categoryPlaces);
