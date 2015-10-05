@@ -6,6 +6,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.toothbrushclan.hangman.utilities.HangmanSQLiteHelper;
+
+import java.util.Map;
+
 /**
  * Created by ushaikh on 04/10/15.
  */

@@ -39,6 +39,7 @@ public class ConfirmationDialog extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        setCancelable(false);
         builder.setTitle(R.string.goBack);
         builder.setMessage(R.string.gameInProgress);
         builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {

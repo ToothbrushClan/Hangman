@@ -24,7 +24,10 @@ import com.toothbrushclan.hangman.utilities.AllDoneDialog;
 import com.toothbrushclan.hangman.utilities.ConfirmationDialog;
 import com.toothbrushclan.hangman.utilities.CongratulationsDialog;
 import com.toothbrushclan.hangman.utilities.FailureDialog;
+import com.toothbrushclan.hangman.utilities.HangmanSQLiteHelper;
 import com.toothbrushclan.hangman.utilities.QuestionValidator;
+
+import java.util.Map;
 
 public class HangmanActivity extends Activity implements View.OnClickListener, FailureDialog.FailureDialogListener, CongratulationsDialog.CongratulationsDialogListener, AllDoneDialog.AllDoneDialogListener, ConfirmationDialog.ConfirmationDialogListener {
 
@@ -95,59 +98,117 @@ public class HangmanActivity extends Activity implements View.OnClickListener, F
 
     private void setCategory(String categoryType) {
         switch (categoryType) {
+//            case "Kids" :
+//                category = new Category(super.getApplicationContext(), "raw/kids");
+//                break;
+//            case "Cars" :
+//                category = new Category(super.getApplicationContext(), "raw/cars");
+//                break;
+//            case "Places" :
+//                category = new Category(super.getApplicationContext(), "raw/places");
+//                break;
+//            case "History" :
+//                category = new Category(super.getApplicationContext(), "raw/history");
+//                break;
+//            case "Space" :
+//                category = new Category(super.getApplicationContext(), "raw/space");
+//                break;
+//            case "Animals" :
+//                category = new Category(super.getApplicationContext(), "raw/animals");
+//                break;
+//            case "Politics" :
+//                category = new Category(super.getApplicationContext(), "raw/politics");
+//                break;
+//            case "Food" :
+//                category = new Category(super.getApplicationContext(), "raw/food");
+//                break;
+//            case "Sports" :
+//                category = new Category(super.getApplicationContext(), "raw/sports");
+//                break;
+//            case "Dictionary" :
+//                category = new Category(super.getApplicationContext(), "raw/dictionary");
+//                break;
+//            case "Custom 1" :
+//                category = new Category(super.getApplicationContext(), "raw/custom1");
+//                break;
+//            case "Custom 2" :
+//                category = new Category(super.getApplicationContext(), "raw/custom2");
+//                break;
+//            default :
+//                category = new Category(super.getApplicationContext(), "raw/kids");
             case "Kids" :
-                category = new Category(super.getApplicationContext(), "raw/kids");
+                category = new Category(super.getApplicationContext(), "kids", 1);
                 break;
             case "Cars" :
-                category = new Category(super.getApplicationContext(), "raw/cars");
+                category = new Category(super.getApplicationContext(), "cars", 1);
                 break;
             case "Places" :
-                category = new Category(super.getApplicationContext(), "raw/places");
+                category = new Category(super.getApplicationContext(), "places", 1);
                 break;
             case "History" :
-                category = new Category(super.getApplicationContext(), "raw/history");
+                category = new Category(super.getApplicationContext(), "history", 1);
                 break;
             case "Space" :
-                category = new Category(super.getApplicationContext(), "raw/space");
+                category = new Category(super.getApplicationContext(), "space", 1);
                 break;
             case "Animals" :
-                category = new Category(super.getApplicationContext(), "raw/animals");
+                category = new Category(super.getApplicationContext(), "animals", 1);
                 break;
             case "Politics" :
-                category = new Category(super.getApplicationContext(), "raw/politics");
+                category = new Category(super.getApplicationContext(), "politics", 1);
                 break;
             case "Food" :
-                category = new Category(super.getApplicationContext(), "raw/food");
+                category = new Category(super.getApplicationContext(), "food", 1);
                 break;
             case "Sports" :
-                category = new Category(super.getApplicationContext(), "raw/sports");
+                category = new Category(super.getApplicationContext(), "sports", 1);
                 break;
             case "Dictionary" :
-                category = new Category(super.getApplicationContext(), "raw/dictionary");
+                category = new Category(super.getApplicationContext(), "dictionary", 1);
                 break;
             case "Custom 1" :
-                category = new Category(super.getApplicationContext(), "raw/custom1");
+                category = new Category(super.getApplicationContext(), "custom1", 1);
                 break;
             case "Custom 2" :
-                category = new Category(super.getApplicationContext(), "raw/custom2");
+                category = new Category(super.getApplicationContext(), "custom2", 1);
                 break;
             default :
-                category = new Category(super.getApplicationContext(), "raw/kids");
+                category = new Category(super.getApplicationContext(), "random", 1);
         }
     }
+
+//    private void getNextQuestion() {
+//        tryCount = 0;
+//        regex = baseRegex;
+//        String questionLine = category.getNextQuestion();
+//        if (questionLine == null ) {
+//            question = "QUESTION";
+//            hint = "Nothing to see here";
+//            showAllDoneDialog();
+//        } else {
+//            String[] strQuestion =  questionLine.split(";");
+//            question = strQuestion[0].toUpperCase();
+//            hint = strQuestion[1];
+//        }
+//        hangmanImage.setImageResource(R.drawable.hangman1);
+//        maskedQuestion = questionValidator.getMaskedQuestion(question, regex);
+//        textViewQuestion.setText(maskedQuestion);
+//        textViewHint.setText(hint);
+//        enableAllKeys();
+//    }
 
     private void getNextQuestion() {
         tryCount = 0;
         regex = baseRegex;
-        String questionLine = category.getNextQuestion();
-        if (questionLine == null ) {
+        if (category.getNextQuestionFromDb()){
+            // TODO get category name
+            question = category.getQuestion();
+            hint = category.getHint();
+        } else {
+            // TODO get category name
             question = "QUESTION";
             hint = "Nothing to see here";
             showAllDoneDialog();
-        } else {
-            String[] strQuestion =  questionLine.split(";");
-            question = strQuestion[0].toUpperCase();
-            hint = strQuestion[1];
         }
         hangmanImage.setImageResource(R.drawable.hangman1);
         maskedQuestion = questionValidator.getMaskedQuestion(question, regex);
@@ -393,6 +454,7 @@ public class HangmanActivity extends Activity implements View.OnClickListener, F
         buttonY.setTextColor(defaultTextColor);
         buttonZ.setTextColor(defaultTextColor);
     }
+
     private void disableAllKeys() {
         buttonA.setEnabled(false);
         buttonB.setEnabled(false);

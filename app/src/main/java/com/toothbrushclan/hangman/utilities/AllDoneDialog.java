@@ -38,6 +38,7 @@ public class AllDoneDialog extends DialogFragment {
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             // Use the Builder class for convenient dialog construction
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            setCancelable(false);
             builder.setTitle(R.string.allDone);
             builder.setMessage(R.string.noMoreQuestions);
             builder.setPositiveButton(R.string.back, new DialogInterface.OnClickListener() {

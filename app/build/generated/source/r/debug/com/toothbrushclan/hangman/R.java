@@ -111,6 +111,7 @@ public final class R {
         public static final int politics=0x7f050009;
         public static final int space=0x7f05000a;
         public static final int sports=0x7f05000b;
+        public static final int sqldataquestions=0x7f05000c;
     }
     public static final class string {
         public static final int aboutUs=0x7f080000;
