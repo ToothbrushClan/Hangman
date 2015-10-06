@@ -15,7 +15,8 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="com.toothbrushclan.hangman.StartGameActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,7 +26,8 @@
         <activity
             android:name="com.toothbrushclan.hangman.AboutUsActivity"
             android:label="@string/app_name"
-            android:parentActivityName="com.toothbrushclan.hangman.StartGameActivity" >
+            android:parentActivityName="com.toothbrushclan.hangman.StartGameActivity"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".StartGameActivity" />
@@ -33,7 +35,8 @@
         <activity
             android:name="com.toothbrushclan.hangman.SelectCategoryActivity"
             android:label="@string/app_name"
-            android:parentActivityName="com.toothbrushclan.hangman.StartGameActivity" >
+            android:parentActivityName="com.toothbrushclan.hangman.StartGameActivity"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".StartGameActivity" />
@@ -41,7 +44,8 @@
         <activity
             android:name="com.toothbrushclan.hangman.HangmanActivity"
             android:label="@string/app_name"
-            android:parentActivityName="com.toothbrushclan.hangman.SelectCategoryActivity" >
+            android:parentActivityName="com.toothbrushclan.hangman.SelectCategoryActivity"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".SelectCategoryActivity" />
