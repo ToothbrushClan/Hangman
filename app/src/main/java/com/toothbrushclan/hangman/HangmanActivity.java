@@ -249,13 +249,13 @@ public class HangmanActivity extends Activity implements View.OnClickListener, F
                 if (questionValidator.isCharacterPresent(selectedChar, question)) {
                     maskedQuestion = questionValidator.getMaskedQuestion(question, regex);
                     textViewQuestion.setText(maskedQuestion);
-                    buttonTemp.setTextColor(Color.GREEN);
+                    buttonTemp.setTextColor(getResources().getColor(R.color.darkGreen));
                     if (questionValidator.isQuestionComplete(maskedQuestion)) {
                         disableAllKeys();
                         showCongratulationsDialog();
                     }
                 } else {
-                    buttonTemp.setTextColor(Color.RED);
+                    buttonTemp.setTextColor(getResources().getColor(R.color.darkRed));
                     tryCount++;
                     switch (tryCount) {
                         case 0 :

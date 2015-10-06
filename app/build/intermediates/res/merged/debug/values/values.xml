@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- From: file:/Users/ushaikh/Personal/Projects/Hangman/app/src/main/res/values/strings.xml -->
+    <eat-comment/>
+    <color name="darkGreen">#2E7D32</color>
+    <color name="darkRed">#D32F2F</color>
     <!-- From: file:/Users/ushaikh/Personal/Projects/Hangman/app/src/main/res/values/dimens.xml -->
     <eat-comment/>
     <dimen name="activity_horizontal_margin">16dp</dimen>

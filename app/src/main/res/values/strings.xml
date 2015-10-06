@@ -70,4 +70,7 @@
     <string name="hello_world">Hello world!</string>
 
     <string name="action_settings">Settings</string>
+
+    <color name="darkGreen">#2E7D32</color>
+    <color name="darkRed">#D32F2F</color>
 </resources>
