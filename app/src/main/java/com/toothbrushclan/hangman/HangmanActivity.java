@@ -26,6 +26,7 @@ import com.toothbrushclan.hangman.utilities.CongratulationsDialog;
 import com.toothbrushclan.hangman.utilities.FailureDialog;
 import com.toothbrushclan.hangman.utilities.HangmanSQLiteHelper;
 import com.toothbrushclan.hangman.utilities.QuestionValidator;
+import com.toothbrushclan.hangman.utilities.Settings;
 
 import java.util.Map;
 
@@ -33,7 +34,7 @@ public class HangmanActivity extends Activity implements View.OnClickListener, F
 
     TextView textViewCategory;
     TextView textViewQuestion;
-    TextView textViewHint;
+    Button buttonHint;
     Button buttonA;
     Button buttonB;
     Button buttonC;
@@ -62,6 +63,7 @@ public class HangmanActivity extends Activity implements View.OnClickListener, F
     Button buttonZ;
     ImageView hangmanImage;
     Category categoryObject;
+    Settings settings;
     String category;
     String question;
     String hint;
@@ -69,11 +71,14 @@ public class HangmanActivity extends Activity implements View.OnClickListener, F
     String baseRegex = "[^\\s]";
     String regex = "";
     String categoryType;
-    int maxTryCount = 8;
+    String showHints;
+    final int maxTryCount = 8;
+    final int maxHintTryCount = 6;
     int tryCount = 0;
     QuestionValidator questionValidator;
     int defaultTextColor;
     Drawable defaultButtonDrawable;
+    boolean gameStarted = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,9 +94,10 @@ public class HangmanActivity extends Activity implements View.OnClickListener, F
 
     private void init() {
         questionValidator = new QuestionValidator();
+        settings = new Settings(this);
+        showHints = settings.getSetting(getResources().getString(R.string.dbShowHints));
         textViewCategory = (TextView) findViewById(R.id.category);
         textViewQuestion = (TextView) findViewById(R.id.question);
-        textViewHint = (TextView) findViewById(R.id.hint);
         hangmanImage = (ImageView) findViewById(R.id.animation);
         defaultTextColor = textViewQuestion.getTextColors().getDefaultColor();
         setCategory(categoryType);
@@ -132,11 +138,11 @@ public class HangmanActivity extends Activity implements View.OnClickListener, F
             case "Dictionary" :
                 categoryCode = "dictionary";
                 break;
-            case "Custom 1" :
-                categoryCode = "custom1";
+            case "Random" :
+                categoryCode = "random";
                 break;
-            case "Custom 2" :
-                categoryCode = "custom2";
+            case "Custom" :
+                categoryCode = "custom";
                 break;
             default :
                 categoryCode = "random";
@@ -147,21 +153,31 @@ public class HangmanActivity extends Activity implements View.OnClickListener, F
     private void getNextQuestion() {
         tryCount = 0;
         regex = baseRegex;
+        gameStarted = false;
         if (categoryObject.getNextQuestionFromDb()){
-            category = categoryObject.getCategory();
             question = categoryObject.getQuestion().toUpperCase();
             hint = categoryObject.getHint();
+            category = categoryObject.getCategory();
+            StringBuilder categorySb = new StringBuilder(category.toLowerCase());
+            categorySb.setCharAt(0, Character.toUpperCase(categorySb.charAt(0)));
+            category = categorySb.toString();
         } else {
-            category = "All Done";
+            category = "";
             question = "QUESTION";
-            hint = "Nothing to see here";
+            hint = "";
             showAllDoneDialog();
         }
         hangmanImage.setImageResource(R.drawable.hangman1);
         maskedQuestion = questionValidator.getMaskedQuestion(question, regex);
-        textViewCategory.setText(getResources().getString(R.string.category) + category);
+        textViewCategory.setText(getResources().getString(R.string.category) + " " + category);
         textViewQuestion.setText(maskedQuestion);
-        textViewHint.setText(hint);
+        if ( showHints.equals(getResources().getString(R.string.dbTrue))) {
+            buttonHint.setText(hint);
+        } else {
+            buttonHint.setText(getResources().getString(R.string.showHints));
+            buttonHint.setEnabled(true);
+        }
+
         enableAllKeys();
     }
 
@@ -218,6 +234,16 @@ public class HangmanActivity extends Activity implements View.OnClickListener, F
         buttonX.setOnClickListener(this);
         buttonY.setOnClickListener(this);
         buttonZ.setOnClickListener(this);
+        buttonHint = (Button) findViewById(R.id.hint);
+        buttonHint.setOnClickListener(this);
+        buttonHint.setTextColor(defaultTextColor);
+        buttonHint.setBackgroundColor(Color.TRANSPARENT);
+        if ( showHints.equals(getResources().getString(R.string.dbTrue))) {
+            buttonHint.setEnabled(false);
+        } else {
+            buttonHint.setEnabled(true);
+            buttonHint.setText(getResources().getString(R.string.showHints));
+        }
         defaultButtonDrawable = buttonA.getBackground();
     }
 
@@ -242,10 +268,14 @@ public class HangmanActivity extends Activity implements View.OnClickListener, F
     public void onClick(View v) {
         switch(v.getId())
         {
+            case R.id.hint:
+                wrongCharacterPressed((Button) v, true);
+                break;
             default:
                 Button buttonTemp = (Button) v;
                 String selectedChar = (String) buttonTemp.getText();
                 regex = questionValidator.updateRegex(selectedChar, regex);
+                gameStarted = true;
                 if (questionValidator.isCharacterPresent(selectedChar, question)) {
                     maskedQuestion = questionValidator.getMaskedQuestion(question, regex);
                     textViewQuestion.setText(maskedQuestion);
@@ -254,50 +284,64 @@ public class HangmanActivity extends Activity implements View.OnClickListener, F
                         disableAllKeys();
                         showCongratulationsDialog();
                     }
+                    buttonTemp.setBackgroundColor(Color.TRANSPARENT);
+                    buttonTemp.setEnabled(false);
                 } else {
-                    buttonTemp.setTextColor(getResources().getColor(R.color.darkRed));
-                    tryCount++;
-                    switch (tryCount) {
-                        case 0 :
-                            hangmanImage.setImageResource(R.drawable.hangman1);
-                            break;
-                        case 1 :
-                            hangmanImage.setImageResource(R.drawable.hangman2);
-                            break;
-                        case 2 :
-                            hangmanImage.setImageResource(R.drawable.hangman3);
-                            break;
-                        case 3 :
-                            hangmanImage.setImageResource(R.drawable.hangman4);
-                            break;
-                        case 4 :
-                            hangmanImage.setImageResource(R.drawable.hangman5);
-                            break;
-                        case 5 :
-                            hangmanImage.setImageResource(R.drawable.hangman6);
-                            break;
-                        case 6 :
-                            hangmanImage.setImageResource(R.drawable.hangman7);
-                            break;
-                        case 7 :
-                            hangmanImage.setImageResource(R.drawable.hangman8);
-                            break;
-                        case 8 :
-                            hangmanImage.setImageResource(R.drawable.hangman9);
-                            break;
-                        default :
-                            hangmanImage.setImageResource(R.drawable.hangman9);
-                    }
-                    if (tryCount == maxTryCount) {
-                        textViewQuestion.setText(question);
-                        disableAllKeys();
-                        showFailureDialog();
-                    }
+                    wrongCharacterPressed(buttonTemp, false);
                 }
-
-                buttonTemp.setBackgroundColor(Color.TRANSPARENT);
-                buttonTemp.setEnabled(false);
         }
+    }
+
+    private void wrongCharacterPressed ( Button button, boolean isShowHintsButton) {
+        if (isShowHintsButton) {
+            button.setText(hint);
+            gameStarted = true;
+        } else {
+            button.setTextColor(getResources().getColor(R.color.darkRed));
+        }
+        tryCount++;
+        if (tryCount >= maxHintTryCount) {
+            buttonHint.setEnabled(false);
+            buttonHint.setText(hint);
+        }
+        switch (tryCount) {
+            case 0 :
+                hangmanImage.setImageResource(R.drawable.hangman1);
+                break;
+            case 1 :
+                hangmanImage.setImageResource(R.drawable.hangman2);
+                break;
+            case 2 :
+                hangmanImage.setImageResource(R.drawable.hangman3);
+                break;
+            case 3 :
+                hangmanImage.setImageResource(R.drawable.hangman4);
+                break;
+            case 4 :
+                hangmanImage.setImageResource(R.drawable.hangman5);
+                break;
+            case 5 :
+                hangmanImage.setImageResource(R.drawable.hangman6);
+                break;
+            case 6 :
+                hangmanImage.setImageResource(R.drawable.hangman7);
+                break;
+            case 7 :
+                hangmanImage.setImageResource(R.drawable.hangman8);
+                break;
+            case 8 :
+                hangmanImage.setImageResource(R.drawable.hangman9);
+                break;
+            default :
+                hangmanImage.setImageResource(R.drawable.hangman9);
+        }
+        if (tryCount == maxTryCount) {
+            textViewQuestion.setText(question);
+            disableAllKeys();
+            showFailureDialog();
+        }
+        button.setBackgroundColor(Color.TRANSPARENT);
+        button.setEnabled(false);
     }
 
     private void showFailureDialog() {
@@ -471,7 +515,7 @@ public class HangmanActivity extends Activity implements View.OnClickListener, F
     }
 
     private void backKeyHandler() {
-        if ( ! regex.equals(baseRegex)) {
+        if ( gameStarted ) {
             showConfirmationDialog();
         } else {
             super.onBackPressed();

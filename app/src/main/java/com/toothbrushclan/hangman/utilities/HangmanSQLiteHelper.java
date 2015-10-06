@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.toothbrushclan.hangman.R;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -21,10 +23,14 @@ public class HangmanSQLiteHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "HangmanDb";
     private static final String TABLE_QUESTIONS = "questions";
+    private static final String COLUMN_ID = "id";
     private static final String COLUMN_CATEGORY = "category";
     private static final String COLUMN_QUESTION = "question";
     private static final String COLUMN_HINT = "hint";
     private static final String COLUMN_DIFFICULTY = "difficulty";
+    private static final String TABLE_SETTINGS = "settings";
+    private static final String COLUMN_NAME = "name";
+    private static final String COLUMN_VALUE = "value";
     Context context;
 
     public HangmanSQLiteHelper(Context context) {
@@ -42,7 +48,21 @@ public class HangmanSQLiteHelper extends SQLiteOpenHelper {
                 "hint TEXT, " +
                 "difficulty INTEGER )";
         db.execSQL(CREATE_QUESTIONS_TABLE);
+        String CREATE_SETTINGS_TABLE = "CREATE TABLE "
+                + TABLE_SETTINGS + " ( " +
+                COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_NAME + " TEXT, " +
+                COLUMN_VALUE + " TEXT )";
+        db.execSQL(CREATE_SETTINGS_TABLE);
         loadData(db);
+        loadSettings(db);
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_QUESTIONS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_SETTINGS);
+        this.onCreate(db);
     }
 
     private void loadData(SQLiteDatabase db) {
@@ -56,7 +76,13 @@ public class HangmanSQLiteHelper extends SQLiteOpenHelper {
             insertQuestionValues.put("difficulty", Integer.parseInt(questionArray[3]));
             db.insert(TABLE_QUESTIONS, null, insertQuestionValues);
         }
-        System.out.println("hello");
+    }
+
+    private void loadSettings(SQLiteDatabase db) {
+        ContentValues insertSettingsValues = new ContentValues();
+        insertSettingsValues.put(COLUMN_NAME, context.getResources().getString(R.string.dbShowHints));
+        insertSettingsValues.put(COLUMN_VALUE, context.getResources().getString(R.string.dbTrue));
+        db.insert(TABLE_SETTINGS, null, insertSettingsValues);
     }
 
     protected List<String> readFile(String resourceName) {
@@ -75,12 +101,6 @@ public class HangmanSQLiteHelper extends SQLiteOpenHelper {
             e.printStackTrace();
         }
         return dataList;
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_QUESTIONS);
-        this.onCreate(db);
     }
 
     public Map<String, Map<String, String>> getQuestionMap(String category, int difficulty){
@@ -123,4 +143,29 @@ public class HangmanSQLiteHelper extends SQLiteOpenHelper {
         }
         return categoryMap;
     }
+
+    public String getSetting (String settingName) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String whereClause = COLUMN_NAME + " = ?";
+        String[] whereArgs = {settingName};
+        Cursor cursor = db.query(TABLE_SETTINGS,
+                new String[]{COLUMN_NAME, COLUMN_VALUE},
+                whereClause, whereArgs,
+                null, null, null);
+        if (cursor.moveToFirst()) {
+            String value = cursor.getString(cursor.getColumnIndex(COLUMN_VALUE));
+            return value;
+        }
+        return null;
+    }
+
+    public void setSetting (String settingName, String settingValue) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String whereClause = COLUMN_NAME + " = ?";
+        String[] whereArgs = {settingName};
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_VALUE, settingValue);
+        db.update(TABLE_SETTINGS, values, whereClause, whereArgs);
+    }
+
 }

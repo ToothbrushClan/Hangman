@@ -6,7 +6,7 @@
     <TextView
         android:id="@+id/textSelectCategory"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_weight="1"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
@@ -160,24 +160,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
+        android:layout_marginBottom="20dp"
         android:id="@+id/categoryLayout6">
 
         <Button
-            android:id="@+id/categoryCustom1"
+            android:id="@+id/categoryRandom"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_gravity="center"
-            android:text="@string/categoryCustom1"/>
+            android:text="@string/categoryRandom"/>
 
         <Button
-            android:id="@+id/categoryCustom2"
+            android:id="@+id/categoryCustom"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_gravity="center"
             android:layout_marginLeft="40dp"
-            android:text="@string/categoryCustom2"/>
+            android:text="@string/categoryCustom"/>
 
     </LinearLayout>
 

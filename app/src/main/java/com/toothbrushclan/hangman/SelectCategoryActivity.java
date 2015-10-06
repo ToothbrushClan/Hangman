@@ -21,8 +21,8 @@ public class SelectCategoryActivity extends Activity implements View.OnClickList
     Button buttonFood;
     Button buttonSports;
     Button buttonDictionary;
-    Button buttonCustom1;
-    Button buttonCustom2;
+    Button buttonRandom;
+    Button buttonCustom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +41,8 @@ public class SelectCategoryActivity extends Activity implements View.OnClickList
         buttonFood = (Button) findViewById(R.id.categoryFood);
         buttonSports = (Button) findViewById(R.id.categorySports);
         buttonDictionary = (Button) findViewById(R.id.categoryDictionary);
-        buttonCustom1 = (Button) findViewById(R.id.categoryCustom1);
-        buttonCustom2 = (Button) findViewById(R.id.categoryCustom2);
+        buttonRandom = (Button) findViewById(R.id.categoryRandom);
+        buttonCustom = (Button) findViewById(R.id.categoryCustom);
         buttonKids.setOnClickListener(this);
         buttonCars.setOnClickListener(this);
         buttonPlaces.setOnClickListener(this);
@@ -53,8 +53,8 @@ public class SelectCategoryActivity extends Activity implements View.OnClickList
         buttonFood.setOnClickListener(this);
         buttonSports.setOnClickListener(this);
         buttonDictionary.setOnClickListener(this);
-        buttonCustom1.setOnClickListener(this);
-        buttonCustom2.setOnClickListener(this);
+        buttonRandom.setOnClickListener(this);
+        buttonCustom.setOnClickListener(this);
     }
 
     @Override

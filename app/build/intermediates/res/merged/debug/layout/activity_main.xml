@@ -30,7 +30,7 @@
             android:textSize="20dp"
             android:text="@string/question"/>
 
-        <TextView
+        <!--TextView
             android:id="@+id/hint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -39,6 +39,15 @@
             android:layout_gravity="center"
             android:textAlignment="center"
             android:textSize="16dp"
+            android:text="@string/hint"/-->
+
+        <Button
+            android:id="@+id/hint"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:textAllCaps="false"
             android:text="@string/hint"/>
 
         <ImageView

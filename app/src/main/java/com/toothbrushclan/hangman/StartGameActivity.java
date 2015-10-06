@@ -16,6 +16,7 @@ import java.util.Map;
 public class StartGameActivity extends Activity implements View.OnClickListener {
 
     Button buttonPlayGame;
+    Button buttonSettings;
     Button buttonAboutUs;
 
     @Override
@@ -28,6 +29,8 @@ public class StartGameActivity extends Activity implements View.OnClickListener 
     private void init() {
         buttonPlayGame = (Button) findViewById(R.id.playGame);
         buttonPlayGame.setOnClickListener(this);
+        buttonSettings = (Button) findViewById(R.id.settings);
+        buttonSettings.setOnClickListener(this);
         buttonAboutUs = (Button) findViewById(R.id.aboutUs);
         buttonAboutUs.setOnClickListener(this);
     }
@@ -38,6 +41,10 @@ public class StartGameActivity extends Activity implements View.OnClickListener 
             case R.id.playGame :
                 Intent playGameIntent = new Intent(this, SelectCategoryActivity.class);
                 startActivity(playGameIntent);
+                break;
+            case R.id.settings :
+                Intent settingsIntent = new Intent(this, SettingsActivity.class);
+                startActivity(settingsIntent);
                 break;
             case R.id.aboutUs :
                 Intent aboutUsIntent = new Intent(this, AboutUsActivity.class);
