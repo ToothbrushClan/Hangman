@@ -13,6 +13,7 @@
     <string name="animation">Animation</string>
     <string name="app_name">Hangman</string>
     <string name="back">Back</string>
+    <string name="category">Category: </string>
     <string name="categoryAnimals">Animals</string>
     <string name="categoryCars">Cars</string>
     <string name="categoryCustom1">Custom 1</string>

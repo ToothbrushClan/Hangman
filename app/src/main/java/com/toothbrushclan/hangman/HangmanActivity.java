@@ -31,6 +31,7 @@ import java.util.Map;
 
 public class HangmanActivity extends Activity implements View.OnClickListener, FailureDialog.FailureDialogListener, CongratulationsDialog.CongratulationsDialogListener, AllDoneDialog.AllDoneDialogListener, ConfirmationDialog.ConfirmationDialogListener {
 
+    TextView textViewCategory;
     TextView textViewQuestion;
     TextView textViewHint;
     Button buttonA;
@@ -60,7 +61,8 @@ public class HangmanActivity extends Activity implements View.OnClickListener, F
     Button buttonY;
     Button buttonZ;
     ImageView hangmanImage;
-    Category category;
+    Category categoryObject;
+    String category;
     String question;
     String hint;
     String maskedQuestion;
@@ -76,142 +78,88 @@ public class HangmanActivity extends Activity implements View.OnClickListener, F
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // requestWindowFeature(Window.FEATURE_NO_TITLE);
-        // getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             categoryType = bundle.getString("categoryType");
         }
+        init();
+    }
 
-        setCategory(categoryType);
-
+    private void init() {
+        questionValidator = new QuestionValidator();
+        textViewCategory = (TextView) findViewById(R.id.category);
         textViewQuestion = (TextView) findViewById(R.id.question);
         textViewHint = (TextView) findViewById(R.id.hint);
         hangmanImage = (ImageView) findViewById(R.id.animation);
         defaultTextColor = textViewQuestion.getTextColors().getDefaultColor();
+        setCategory(categoryType);
         findAndInitializeButtons();
-        questionValidator = new QuestionValidator();
         getNextQuestion();
     }
 
     private void setCategory(String categoryType) {
+        String categoryCode;
         switch (categoryType) {
-//            case "Kids" :
-//                category = new Category(super.getApplicationContext(), "raw/kids");
-//                break;
-//            case "Cars" :
-//                category = new Category(super.getApplicationContext(), "raw/cars");
-//                break;
-//            case "Places" :
-//                category = new Category(super.getApplicationContext(), "raw/places");
-//                break;
-//            case "History" :
-//                category = new Category(super.getApplicationContext(), "raw/history");
-//                break;
-//            case "Space" :
-//                category = new Category(super.getApplicationContext(), "raw/space");
-//                break;
-//            case "Animals" :
-//                category = new Category(super.getApplicationContext(), "raw/animals");
-//                break;
-//            case "Politics" :
-//                category = new Category(super.getApplicationContext(), "raw/politics");
-//                break;
-//            case "Food" :
-//                category = new Category(super.getApplicationContext(), "raw/food");
-//                break;
-//            case "Sports" :
-//                category = new Category(super.getApplicationContext(), "raw/sports");
-//                break;
-//            case "Dictionary" :
-//                category = new Category(super.getApplicationContext(), "raw/dictionary");
-//                break;
-//            case "Custom 1" :
-//                category = new Category(super.getApplicationContext(), "raw/custom1");
-//                break;
-//            case "Custom 2" :
-//                category = new Category(super.getApplicationContext(), "raw/custom2");
-//                break;
-//            default :
-//                category = new Category(super.getApplicationContext(), "raw/kids");
             case "Kids" :
-                category = new Category(super.getApplicationContext(), "kids", 1);
+                categoryCode = "kids";
                 break;
             case "Cars" :
-                category = new Category(super.getApplicationContext(), "cars", 1);
+                categoryCode = "cars";
                 break;
             case "Places" :
-                category = new Category(super.getApplicationContext(), "places", 1);
+                categoryCode = "places";
                 break;
             case "History" :
-                category = new Category(super.getApplicationContext(), "history", 1);
+                categoryCode = "history";
                 break;
             case "Space" :
-                category = new Category(super.getApplicationContext(), "space", 1);
+                categoryCode = "space";
                 break;
             case "Animals" :
-                category = new Category(super.getApplicationContext(), "animals", 1);
+                categoryCode = "animals";
                 break;
             case "Politics" :
-                category = new Category(super.getApplicationContext(), "politics", 1);
+                categoryCode = "politics";
                 break;
             case "Food" :
-                category = new Category(super.getApplicationContext(), "food", 1);
+                categoryCode = "food";
                 break;
             case "Sports" :
-                category = new Category(super.getApplicationContext(), "sports", 1);
+                categoryCode = "sports";
                 break;
             case "Dictionary" :
-                category = new Category(super.getApplicationContext(), "dictionary", 1);
+                categoryCode = "dictionary";
                 break;
             case "Custom 1" :
-                category = new Category(super.getApplicationContext(), "custom1", 1);
+                categoryCode = "custom1";
                 break;
             case "Custom 2" :
-                category = new Category(super.getApplicationContext(), "custom2", 1);
+                categoryCode = "custom2";
                 break;
             default :
-                category = new Category(super.getApplicationContext(), "random", 1);
+                categoryCode = "random";
         }
+        categoryObject = new Category(super.getApplicationContext(), categoryCode, 1);
     }
-
-//    private void getNextQuestion() {
-//        tryCount = 0;
-//        regex = baseRegex;
-//        String questionLine = category.getNextQuestion();
-//        if (questionLine == null ) {
-//            question = "QUESTION";
-//            hint = "Nothing to see here";
-//            showAllDoneDialog();
-//        } else {
-//            String[] strQuestion =  questionLine.split(";");
-//            question = strQuestion[0].toUpperCase();
-//            hint = strQuestion[1];
-//        }
-//        hangmanImage.setImageResource(R.drawable.hangman1);
-//        maskedQuestion = questionValidator.getMaskedQuestion(question, regex);
-//        textViewQuestion.setText(maskedQuestion);
-//        textViewHint.setText(hint);
-//        enableAllKeys();
-//    }
 
     private void getNextQuestion() {
         tryCount = 0;
         regex = baseRegex;
-        if (category.getNextQuestionFromDb()){
-            // TODO get category name
-            question = category.getQuestion();
-            hint = category.getHint();
+        if (categoryObject.getNextQuestionFromDb()){
+            category = categoryObject.getCategory();
+            question = categoryObject.getQuestion().toUpperCase();
+            hint = categoryObject.getHint();
         } else {
-            // TODO get category name
+            category = "All Done";
             question = "QUESTION";
             hint = "Nothing to see here";
             showAllDoneDialog();
         }
         hangmanImage.setImageResource(R.drawable.hangman1);
         maskedQuestion = questionValidator.getMaskedQuestion(question, regex);
+        textViewCategory.setText(getResources().getString(R.string.category) + category);
         textViewQuestion.setText(maskedQuestion);
         textViewHint.setText(hint);
         enableAllKeys();
@@ -273,13 +221,6 @@ public class HangmanActivity extends Activity implements View.OnClickListener, F
         defaultButtonDrawable = buttonA.getBackground();
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu_main, menu);
-//        return true;
-//    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -299,7 +240,7 @@ public class HangmanActivity extends Activity implements View.OnClickListener, F
 
     @Override
     public void onClick(View v) {
-        switch(v.getId())  //get the id of the view clicked. (in this case button)
+        switch(v.getId())
         {
             default:
                 Button buttonTemp = (Button) v;
@@ -549,7 +490,7 @@ public class HangmanActivity extends Activity implements View.OnClickListener, F
 
     @Override
     public void onDialogNoClick(DialogFragment dialog) {
-        // to
+        // Do nothing
     }
 
 }

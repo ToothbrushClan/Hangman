@@ -5,6 +5,7 @@
     <string name="aboutUs">About Us</string>
     <string name="aboutUsDescription">We\'re the Toothbrush Clan\nDon\'t forget to floss</string>
 
+    <string name="category">Category: </string>
     <string name="question">_ _ _</string>
     <string name="hint">Default Hint!</string>
     <string name="animation">Animation</string>

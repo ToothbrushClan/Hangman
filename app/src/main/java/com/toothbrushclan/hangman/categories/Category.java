@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
@@ -27,7 +28,9 @@ public class Category {
     String category = "";
     Map<String, Map<String, String>> categoryMap;
     Map<String, String> questionMap;
+    Map<String, String> randomQuestionMap;
     List questionKeys;
+    List randomQuestionKeys;
     HangmanSQLiteHelper db;
 
     public Category(Context context, String resourceFileName){
@@ -88,29 +91,54 @@ public class Category {
             if (categoryMap.isEmpty()) {
                 return false;
             }
-            // TODO: Implement for random
-            category = categoryName;
-            questionMap = categoryMap.get(categoryName);
-            if ( questionMap.size() == 0 ) {
-                return false;
+            if (categoryName.equals("random")) {
+                randomQuestionMap = new HashMap<>();
+                for (String categoryKey : categoryMap.keySet()) {
+                    Map<String, String> tempQuestionMap = categoryMap.get(categoryKey);
+                    for (String questionKey : tempQuestionMap.keySet()) {
+                        randomQuestionMap.put(categoryKey + ";" + questionKey, tempQuestionMap.get(questionKey));
+                    }
+                }
+                randomQuestionKeys = new ArrayList(randomQuestionMap.keySet());
+            } else {
+                setCategory(categoryName);
+                questionMap = categoryMap.get(categoryName);
+                if (questionMap.size() == 0) {
+                    return false;
+                }
+                questionKeys = new ArrayList(questionMap.keySet());
             }
-            questionKeys = new ArrayList(questionMap.keySet());
         }
 
-        Collections.shuffle(questionKeys);
-        ListIterator<String> iterator = questionKeys.listIterator();
-        if (iterator.hasNext()) {
-            question = iterator.next();
-            hint = questionMap.get(question);
-            iterator.remove();
+        if (categoryName.equals("random")) {
+            Collections.shuffle(randomQuestionKeys);
+            ListIterator<String> iterator = randomQuestionKeys.listIterator();
+            if (iterator.hasNext()) {
+                String categoryQuestion = iterator.next();
+                String[] categoryQuestionArray = categoryQuestion.split(";");
+                setCategory(categoryQuestionArray[0]);
+                setQuestion(categoryQuestionArray[1]);
+                setHint(randomQuestionMap.get(categoryQuestion));
+                iterator.remove();
+            } else {
+                return false;
+            }
         } else {
-            return false;
+            Collections.shuffle(questionKeys);
+            ListIterator<String> iterator = questionKeys.listIterator();
+            if (iterator.hasNext()) {
+                setQuestion(iterator.next());
+                setHint(questionMap.get(question));
+                iterator.remove();
+            } else {
+                return false;
+            }
         }
         return true;
     }
 
     public String getQuestion() {
-        return this.question.toUpperCase();
+        return this.question;
     }
 
     public String getHint() {
@@ -119,6 +147,18 @@ public class Category {
 
     public String getCategory() {
         return this.category;
+    }
+
+    public void setQuestion(String question) {
+        this.question = question;
+    }
+
+    public void setHint(String hint) {
+        this.hint = hint;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
 }
