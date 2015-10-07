@@ -10,44 +10,56 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
+        android:weightSum="9"
         android:id="@+id/mainLayout">
 
-        <TextView
-            android:id="@+id/category"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:weightSum="1"
+            android:layout_alignParentStart="true"
             android:layout_weight="1"
-            android:layout_gravity="left"
-            android:text="@string/category"/>
+            android:id="@+id/topLayout">
+
+            <TextView
+                android:id="@+id/category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_weight="1"
+                android:text="@string/category"/>
+
+            <TextView
+                android:id="@+id/score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:layout_weight="1"
+                android:text="@string/score"/>
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/question"
+            android:gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:layout_gravity="center"
             android:textAllCaps="true"
             android:textSize="20dp"
             android:text="@string/question"/>
 
-        <!--TextView
-            android:id="@+id/hint"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:layout_gravity="center"
-            android:textAlignment="center"
-            android:textSize="16dp"
-            android:text="@string/hint"/-->
-
         <Button
             android:id="@+id/hint"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:layout_gravity="center"
             android:textAllCaps="false"
+            android:textStyle="normal"
             android:text="@string/hint"/>
 
         <ImageView

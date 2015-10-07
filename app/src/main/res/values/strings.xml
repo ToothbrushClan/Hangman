@@ -24,14 +24,17 @@
     <string name="categoryCustom">Custom</string>
 
     <string name="category">Category:</string>
+    <string name="score">Score:</string>
     <string name="question">_ _ _</string>
     <string name="hint">Default Hint!</string>
     <string name="nextQuestion">Next Question</string>
 
     <string name="congratulations">Congratulations!</string>
     <string name="failure">Tough Luck!</string>
+    <string name="noQuestions">No Questions Here</string>
     <string name="allDone">All Done!</string>
     <string name="proceedNext">Do you want to go to the next question?</string>
+    <string name="checkBackSoon">No questions seem to be present in this category. Check back soon for more...</string>
     <string name="noMoreQuestions">You\'re all done with questions in this category...</string>
     <string name="back">Back</string>
     <string name="yes">Yes</string>

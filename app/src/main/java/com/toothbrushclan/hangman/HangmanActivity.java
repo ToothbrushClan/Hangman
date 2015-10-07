@@ -2,19 +2,12 @@ package com.toothbrushclan.hangman;
 
 import android.app.Activity;
 import android.app.DialogFragment;
-import android.content.res.ColorStateList;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.RippleDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -24,16 +17,15 @@ import com.toothbrushclan.hangman.utilities.AllDoneDialog;
 import com.toothbrushclan.hangman.utilities.ConfirmationDialog;
 import com.toothbrushclan.hangman.utilities.CongratulationsDialog;
 import com.toothbrushclan.hangman.utilities.FailureDialog;
-import com.toothbrushclan.hangman.utilities.HangmanSQLiteHelper;
 import com.toothbrushclan.hangman.utilities.QuestionValidator;
 import com.toothbrushclan.hangman.utilities.Settings;
-
-import java.util.Map;
 
 public class HangmanActivity extends Activity implements View.OnClickListener, FailureDialog.FailureDialogListener, CongratulationsDialog.CongratulationsDialogListener, AllDoneDialog.AllDoneDialogListener, ConfirmationDialog.ConfirmationDialogListener {
 
     TextView textViewCategory;
     TextView textViewQuestion;
+    TextView textViewScore;
+
     Button buttonHint;
     Button buttonA;
     Button buttonB;
@@ -61,23 +53,33 @@ public class HangmanActivity extends Activity implements View.OnClickListener, F
     Button buttonX;
     Button buttonY;
     Button buttonZ;
+
     ImageView hangmanImage;
+
+    Drawable defaultButtonDrawable;
+
     Category categoryObject;
+    QuestionValidator questionValidator;
     Settings settings;
+
     String category;
     String question;
     String hint;
     String maskedQuestion;
-    String baseRegex = "[^\\s]";
-    String regex = "";
     String categoryType;
     String showHints;
+    String regex = "";
+    final String baseRegex = "[^\\s]";
+
     final int maxTryCount = 8;
     final int maxHintTryCount = 6;
     int tryCount = 0;
-    QuestionValidator questionValidator;
+    int questionCount = 0;
+    int perfectAnswerCount = 0;
+    int hintsUsedCount = 0;
     int defaultTextColor;
-    Drawable defaultButtonDrawable;
+    int score;
+
     boolean gameStarted = false;
 
     @Override
@@ -98,8 +100,14 @@ public class HangmanActivity extends Activity implements View.OnClickListener, F
         showHints = settings.getSetting(getResources().getString(R.string.dbShowHints));
         textViewCategory = (TextView) findViewById(R.id.category);
         textViewQuestion = (TextView) findViewById(R.id.question);
+        textViewScore = (TextView) findViewById(R.id.score);
         hangmanImage = (ImageView) findViewById(R.id.animation);
         defaultTextColor = textViewQuestion.getTextColors().getDefaultColor();
+        score = 0;
+        questionCount = 0;
+        perfectAnswerCount = 0;
+        hintsUsedCount = 0;
+        setScoreText();
         setCategory(categoryType);
         findAndInitializeButtons();
         getNextQuestion();
@@ -161,6 +169,7 @@ public class HangmanActivity extends Activity implements View.OnClickListener, F
             StringBuilder categorySb = new StringBuilder(category.toLowerCase());
             categorySb.setCharAt(0, Character.toUpperCase(categorySb.charAt(0)));
             category = categorySb.toString();
+            questionCount++;
         } else {
             category = "";
             question = "QUESTION";
@@ -281,6 +290,8 @@ public class HangmanActivity extends Activity implements View.OnClickListener, F
                     textViewQuestion.setText(maskedQuestion);
                     buttonTemp.setTextColor(getResources().getColor(R.color.darkGreen));
                     if (questionValidator.isQuestionComplete(maskedQuestion)) {
+                        updateScore();
+                        setScoreText();
                         disableAllKeys();
                         showCongratulationsDialog();
                     }
@@ -292,10 +303,45 @@ public class HangmanActivity extends Activity implements View.OnClickListener, F
         }
     }
 
+    private void setScoreText() {
+        textViewScore.setText(getResources().getString(R.string.score) + " " + score);
+    }
+
+    private void updateScore() {
+        switch (tryCount) {
+            case 0 :
+                score = score + 10;
+                perfectAnswerCount++;
+                break;
+            case 1 :
+                score = score + 8;
+                break;
+            case 2 :
+                score = score + 6;
+                break;
+            case 3 :
+                score = score + 5;
+                break;
+            case 4 :
+                score = score + 4;
+                break;
+            case 5 :
+                score = score + 3;
+                break;
+            case 6 :
+                score = score + 2;
+                break;
+            case 7 :
+                score = score + 1;
+                break;
+        }
+    }
+
     private void wrongCharacterPressed ( Button button, boolean isShowHintsButton) {
         if (isShowHintsButton) {
             button.setText(hint);
             gameStarted = true;
+            hintsUsedCount++;
         } else {
             button.setTextColor(getResources().getColor(R.color.darkRed));
         }
@@ -355,7 +401,11 @@ public class HangmanActivity extends Activity implements View.OnClickListener, F
     }
 
     private void showAllDoneDialog() {
+        Bundle args = new Bundle();
+        args.putInt("questionCount", questionCount);
+        args.putInt("score", score);
         DialogFragment dialog = new AllDoneDialog();
+        dialog.setArguments(args);
         dialog.show(getFragmentManager(),"allDone");
     }
 

@@ -37,10 +37,20 @@ public class AllDoneDialog extends DialogFragment {
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             // Use the Builder class for convenient dialog construction
+            Bundle args = getArguments();
+            int questionCount = args.getInt("questionCount");
+            int score = args.getInt("score");
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             setCancelable(false);
-            builder.setTitle(R.string.allDone);
-            builder.setMessage(R.string.noMoreQuestions);
+            if (questionCount == 0) {
+                builder.setTitle(R.string.noQuestions);
+                builder.setMessage(R.string.checkBackSoon);
+            } else {
+                String scoreString = "\n\nCongratulations!\nYou scored " + score + " points out of a possible "
+                        + questionCount*10 + " points\nQuestions attempted: " + questionCount;
+                builder.setTitle(R.string.allDone);
+                builder.setMessage(getResources().getString(R.string.noMoreQuestions) + scoreString);
+            }
             builder.setPositiveButton(R.string.back, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
                     allDoneDialogListener.onDialogBackClick(AllDoneDialog.this);

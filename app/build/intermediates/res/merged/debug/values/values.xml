@@ -28,6 +28,7 @@
     <string name="categoryRandom">Random</string>
     <string name="categorySpace">Space</string>
     <string name="categorySports">Sports</string>
+    <string name="checkBackSoon">No questions seem to be present in this category. Check back soon for more...</string>
     <string name="congratulations">Congratulations!</string>
     <string name="dbFalse">false</string>
     <string name="dbShowHints">showHints</string>
@@ -65,9 +66,11 @@
     <string name="nextQuestion">Next Question</string>
     <string name="no">No</string>
     <string name="noMoreQuestions">You\'re all done with questions in this category...</string>
+    <string name="noQuestions">No Questions Here</string>
     <string name="playGame">Play Game</string>
     <string name="proceedNext">Do you want to go to the next question?</string>
     <string name="question">_ _ _</string>
+    <string name="score">Score:</string>
     <string name="selectCategory">Select a Category: </string>
     <string name="settings">Settings</string>
     <string name="showHints">Show Hints?</string>
