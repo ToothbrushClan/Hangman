@@ -33,6 +33,15 @@
                 android:value=".StartGameActivity" />
         </activity>
         <activity
+            android:name="com.toothbrushclan.hangman.CustomWordsActivity"
+            android:label="@string/app_name"
+            android:parentActivityName="com.toothbrushclan.hangman.SettingsActivity"
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".SettingsActivity" />
+        </activity>
+        <activity
             android:name="com.toothbrushclan.hangman.AboutUsActivity"
             android:label="@string/app_name"
             android:parentActivityName="com.toothbrushclan.hangman.StartGameActivity"

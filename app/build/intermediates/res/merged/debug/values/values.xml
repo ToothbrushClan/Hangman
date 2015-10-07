@@ -12,9 +12,12 @@
     <eat-comment/>
     <string name="aboutUs">About Us</string>
     <string name="aboutUsDescription">We\'re the Toothbrush Clan\nDon\'t forget to floss</string>
+    <string name="addCustomWord">Add Word</string>
     <string name="allDone">All Done!</string>
+    <string name="animals">animals</string>
     <string name="app_name">Hangman</string>
     <string name="back">Back</string>
+    <string name="cars">cars</string>
     <string name="category">Category:</string>
     <string name="categoryAnimals">Animals</string>
     <string name="categoryCars">Cars</string>
@@ -30,13 +33,24 @@
     <string name="categorySports">Sports</string>
     <string name="checkBackSoon">No questions seem to be present in this category. Check back soon for more...</string>
     <string name="congratulations">Congratulations!</string>
+    <string name="custom">custom</string>
+    <string name="customWords">Custom Words</string>
     <string name="dbFalse">false</string>
     <string name="dbShowHints">showHints</string>
     <string name="dbTrue">true</string>
+    <string name="delete">Delete</string>
+    <string name="dictionary">dictionary</string>
+    <string name="edit">Edit</string>
+    <string name="editTextDifficultyHint">Difficulty</string>
+    <string name="editTextHintHint">Hint</string>
+    <string name="editTextQuestionHint">Question</string>
+    <string name="emptyListText">Please click on Add Word</string>
     <string name="failure">Tough Luck!</string>
+    <string name="food">food</string>
     <string name="gameInProgress">Are you sure? A game is in progress...</string>
     <string name="goBack">Go Back?</string>
     <string name="hint">Default Hint!</string>
+    <string name="history">history</string>
     <string name="keyboardA">A</string>
     <string name="keyboardB">B</string>
     <string name="keyboardC">C</string>
@@ -63,17 +77,24 @@
     <string name="keyboardX">X</string>
     <string name="keyboardY">Y</string>
     <string name="keyboardZ">Z</string>
+    <string name="kids">kids</string>
+    <string name="manage">Manage</string>
     <string name="nextQuestion">Next Question</string>
     <string name="no">No</string>
     <string name="noMoreQuestions">You\'re all done with questions in this category...</string>
     <string name="noQuestions">No Questions Here</string>
+    <string name="places">places</string>
     <string name="playGame">Play Game</string>
+    <string name="politics">politics</string>
     <string name="proceedNext">Do you want to go to the next question?</string>
     <string name="question">_ _ _</string>
+    <string name="random">random</string>
     <string name="score">Score:</string>
     <string name="selectCategory">Select a Category: </string>
     <string name="settings">Settings</string>
     <string name="showHints">Show Hints?</string>
+    <string name="space">space</string>
+    <string name="sports">sports</string>
     <string name="yes">Yes</string>
     <!-- From: file:/Users/ushaikh/Personal/Projects/Hangman/app/src/main/res/values/styles.xml -->
     <eat-comment/>

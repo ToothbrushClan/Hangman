@@ -6,6 +6,17 @@
     <string name="aboutUs">About Us</string>
 
     <string name="showHints">Show Hints?</string>
+    <string name="customWords">Custom Words</string>
+    <string name="manage">Manage</string>
+    <string name="addCustomWord">Add Word</string>
+    <string name="emptyListText">Please click on Add Word</string>
+
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+
+    <string name="editTextQuestionHint">Question</string>
+    <string name="editTextHintHint">Hint</string>
+    <string name="editTextDifficultyHint">Difficulty</string>
 
     <string name="aboutUsDescription">We\'re the Toothbrush Clan\nDon\'t forget to floss</string>
 
@@ -22,6 +33,19 @@
     <string name="categoryDictionary">Dictionary</string>
     <string name="categoryRandom">Random</string>
     <string name="categoryCustom">Custom</string>
+
+    <string name="kids">kids</string>
+    <string name="cars">cars</string>
+    <string name="places">places</string>
+    <string name="history">history</string>
+    <string name="space">space</string>
+    <string name="animals">animals</string>
+    <string name="politics">politics</string>
+    <string name="food">food</string>
+    <string name="sports">sports</string>
+    <string name="dictionary">dictionary</string>
+    <string name="random">random</string>
+    <string name="custom">custom</string>
 
     <string name="category">Category:</string>
     <string name="score">Score:</string>

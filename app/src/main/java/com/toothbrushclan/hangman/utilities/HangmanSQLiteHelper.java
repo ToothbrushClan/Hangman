@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.toothbrushclan.hangman.R;
+import com.toothbrushclan.hangman.categories.Question;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -142,6 +143,70 @@ public class HangmanSQLiteHelper extends SQLiteOpenHelper {
             categoryMap.put(currentCategory, questionMap);
         }
         return categoryMap;
+    }
+
+    public Question[] getQuestions(String queryCategory){
+        Question[] questions;
+        int questionCount = 0;
+        SQLiteDatabase db = this.getReadableDatabase();
+        String whereClause = COLUMN_CATEGORY + " = ?";
+        String[] whereArgs = {queryCategory};
+        if ( queryCategory.equals("random")) {
+            whereClause = COLUMN_CATEGORY + " like ?";
+            whereArgs = new String[]{"%"};
+        }
+        Cursor cursor = db.query(TABLE_QUESTIONS,
+                new String[]{COLUMN_ID, COLUMN_CATEGORY, COLUMN_QUESTION, COLUMN_HINT, COLUMN_DIFFICULTY},
+                whereClause, whereArgs,
+                null, null, COLUMN_CATEGORY);
+
+        if (cursor.getCount() > 0) {
+            questions = new Question[cursor.getCount()];
+        } else {
+            return null;
+        }
+
+        if (cursor.moveToFirst()) {
+            do {
+                int id = cursor.getInt(cursor.getColumnIndex(COLUMN_ID));
+                int difficulty = cursor.getInt(cursor.getColumnIndex(COLUMN_DIFFICULTY));
+                String category = cursor.getString(cursor.getColumnIndex(COLUMN_CATEGORY));
+                String question = cursor.getString(cursor.getColumnIndex(COLUMN_QUESTION));
+                String hint = cursor.getString(cursor.getColumnIndex(COLUMN_HINT));
+
+                questions[questionCount] = new Question(id, difficulty, category, question, hint);
+                questionCount++;
+            }while ( cursor.moveToNext() );
+        }
+        return questions;
+    }
+
+    public void addQuestion(Question question){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues insertQuestionValues = new ContentValues();
+        insertQuestionValues.put(COLUMN_CATEGORY, question.getCategory());
+        insertQuestionValues.put(COLUMN_QUESTION, question.getQuestion());
+        insertQuestionValues.put(COLUMN_HINT, question.getHint());
+        insertQuestionValues.put(COLUMN_DIFFICULTY, question.getDifficulty());
+        db.insert(TABLE_QUESTIONS, null, insertQuestionValues);
+    }
+
+    public void editQuestion(Question question){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String whereClause = COLUMN_CATEGORY + " = ? AND " + COLUMN_ID + " = ?";
+        String[] whereArgs = {question.getCategory(), String.valueOf(question.getId())};
+        ContentValues updateQuestionValues = new ContentValues();
+        updateQuestionValues.put(COLUMN_QUESTION, question.getQuestion());
+        updateQuestionValues.put(COLUMN_HINT, question.getHint());
+        updateQuestionValues.put(COLUMN_DIFFICULTY, question.getDifficulty());
+        db.update(TABLE_QUESTIONS, updateQuestionValues, whereClause, whereArgs);
+    }
+
+    public void deleteQuestion(Question question){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String whereClause = COLUMN_CATEGORY + " = ? AND " + COLUMN_QUESTION + " = ?";
+        String[] whereArgs = {question.getCategory(),question.getQuestion()};
+        db.delete(TABLE_QUESTIONS, whereClause, whereArgs);
     }
 
     public String getSetting (String settingName) {
