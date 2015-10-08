@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.toothbrushclan.hangman.categories.Question;
 import com.toothbrushclan.hangman.utilities.CustomWordsBaseAdapter;
@@ -27,8 +28,11 @@ public class CustomWordsActivity extends Activity implements View.OnClickListene
     EditText hint;
     EditText difficulty;
     ListView customWordsList;
+    TextView customDialogTitle;
     CustomWordsBaseAdapter customWordsBaseAdapter;
     HangmanSQLiteHelper db;
+    Dialog dialog;
+    Question questionArg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -60,50 +64,54 @@ public class CustomWordsActivity extends Activity implements View.OnClickListene
             case R.id.addCustomWords :
                 showCustomDialog(null);
                 break;
+            case R.id.addWordButton :
+                dialogButtonClick();
+                break;
         }
     }
 
-    private void showCustomDialog(final Question questionArg) {
-        final Dialog dialog = new Dialog(this);
+    private void showCustomDialog(Question questionArg) {
+        dialog = new Dialog(this);
         dialog.setContentView(R.layout.add_word_dialog);
         dialog.setCancelable(false);
+        this.questionArg = questionArg;
 
         addWordDialog = (Button) dialog.findViewById(R.id.addWordButton);
         addWordDialog.setBackgroundColor(Color.TRANSPARENT);
         question = (EditText) dialog.findViewById(R.id.questionEditText);
         hint = (EditText) dialog.findViewById(R.id.hintEditText);
         difficulty = (EditText) dialog.findViewById(R.id.difficultyEditText);
-        dialog.setTitle("Add Word");
+        customDialogTitle = (TextView) dialog.findViewById(R.id.customDialogTitle);
+        customDialogTitle.setText("Add Word");
 
         if ( questionArg != null ) {
             question.setText(questionArg.getQuestion());
             hint.setText(questionArg.getHint());
             difficulty.setText(String.valueOf(questionArg.getDifficulty()));
             addWordDialog.setText("Edit Word");
-            dialog.setTitle("Edit Word");
+            customDialogTitle.setText("Edit Word");
         }
 
-        addWordDialog.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Question questionObject = new Question();
-                questionObject.setQuestion(question.getText().toString().toLowerCase());
-                questionObject.setHint(hint.getText().toString());
-                questionObject.setDifficulty(Integer.parseInt(difficulty.getText().toString()));
-                questionObject.setCategory(getResources().getString(R.string.custom));
-                if ( questionArg != null ) {
-                    questionObject.setId(questionArg.getId());
-                    questionObject.setCategory(questionArg.getCategory());
-                    db.editQuestion(questionObject);
-                } else {
-                    db.addQuestion(questionObject);
-                }
-                updateAdapter();
-                customWordsBaseAdapter.notifyDataSetChanged();
-                dialog.dismiss();
-            }
-        });
+        addWordDialog.setOnClickListener(this);
         dialog.show();
+    }
+
+    public void dialogButtonClick() {
+        Question questionObject = new Question();
+        questionObject.setQuestion(question.getText().toString().toLowerCase());
+        questionObject.setHint(hint.getText().toString());
+        questionObject.setDifficulty(Integer.parseInt(difficulty.getText().toString()));
+        questionObject.setCategory(getResources().getString(R.string.custom));
+        if ( questionArg != null ) {
+            questionObject.setId(questionArg.getId());
+            questionObject.setCategory(questionArg.getCategory());
+            db.editQuestion(questionObject);
+        } else {
+            db.addQuestion(questionObject);
+        }
+        updateAdapter();
+        customWordsBaseAdapter.notifyDataSetChanged();
+        dialog.dismiss();
     }
 
     @Override
