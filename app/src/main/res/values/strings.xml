@@ -10,6 +10,7 @@
     <string name="manage">Manage</string>
     <string name="addCustomWord">Add Word</string>
     <string name="emptyListText">Please click on Add Word</string>
+    <string name="warningTextCustomWords">Maximum 50 Words</string>
 
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>

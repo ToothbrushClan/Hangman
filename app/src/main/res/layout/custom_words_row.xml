@@ -9,6 +9,8 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:baselineAligned="false"
+        android:layout_gravity="fill"
         android:padding="1dp" >
 
         <TextView
@@ -18,21 +20,26 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:textSize="15dp"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:singleLine="true"
             android:textAllCaps="true"
             android:text="@string/editTextQuestionHint" />
 
         <Button
             android:id="@+id/customDelete"
             android:layout_width="75dp"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
+            style="?android:attr/buttonBarButtonStyle"
             android:text="@string/delete" />
 
         <Button
             android:id="@+id/customEdit"
             android:layout_width="75dp"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:layout_toLeftOf="@+id/customDelete"
+            style="?android:attr/buttonBarButtonStyle"
             android:text="@string/edit" />
 
     </RelativeLayout>

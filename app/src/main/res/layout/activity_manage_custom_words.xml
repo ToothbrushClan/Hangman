@@ -18,6 +18,15 @@
         android:textSize="30dp"
         android:text="@string/customWords"/>
 
+    <TextView
+        android:id="@+id/warningTextCustomWords"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:textSize="15dp"
+        android:text="@string/warningTextCustomWords"/>
+
     <Button
         android:id="@+id/addCustomWords"
         android:layout_gravity="center"

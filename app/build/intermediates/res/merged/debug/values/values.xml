@@ -95,6 +95,7 @@
     <string name="showHints">Show Hints?</string>
     <string name="space">space</string>
     <string name="sports">sports</string>
+    <string name="warningTextCustomWords">Maximum 50 Words</string>
     <string name="yes">Yes</string>
     <!-- From: file:/Users/ushaikh/Personal/Projects/Hangman/app/src/main/res/values/styles.xml -->
     <eat-comment/>

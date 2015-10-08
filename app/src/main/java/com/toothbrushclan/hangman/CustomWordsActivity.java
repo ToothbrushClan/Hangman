@@ -28,11 +28,11 @@ public class CustomWordsActivity extends Activity implements View.OnClickListene
     EditText hint;
     EditText difficulty;
     ListView customWordsList;
-    TextView customDialogTitle;
     CustomWordsBaseAdapter customWordsBaseAdapter;
     HangmanSQLiteHelper db;
     Dialog dialog;
     Question questionArg;
+    int maxCustomWords = 15;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -50,12 +50,22 @@ public class CustomWordsActivity extends Activity implements View.OnClickListene
         customWordsList.setAdapter(customWordsBaseAdapter);
         customWordsList.setEmptyView(findViewById(R.id.empty));
         addWord = (Button) findViewById(R.id.addCustomWords);
+        if ( customWordsBaseAdapter.getCount() >= maxCustomWords ) {
+            addWord.setEnabled(false);
+        } else {
+            addWord.setEnabled(true);
+        }
         addWord.setOnClickListener(this);
     }
 
     private void updateAdapter() {
         Question[] questions = db.getQuestions(getResources().getString(R.string.custom));
         customWordsBaseAdapter.updateDate(questions);
+        if ( customWordsBaseAdapter.getCount() >= maxCustomWords ) {
+            addWord.setEnabled(false);
+        } else {
+            addWord.setEnabled(true);
+        }
     }
 
     @Override
@@ -81,15 +91,14 @@ public class CustomWordsActivity extends Activity implements View.OnClickListene
         question = (EditText) dialog.findViewById(R.id.questionEditText);
         hint = (EditText) dialog.findViewById(R.id.hintEditText);
         difficulty = (EditText) dialog.findViewById(R.id.difficultyEditText);
-        customDialogTitle = (TextView) dialog.findViewById(R.id.customDialogTitle);
-        customDialogTitle.setText("Add Word");
+        dialog.setTitle("Add Word");
 
         if ( questionArg != null ) {
             question.setText(questionArg.getQuestion());
             hint.setText(questionArg.getHint());
             difficulty.setText(String.valueOf(questionArg.getDifficulty()));
             addWordDialog.setText("Edit Word");
-            customDialogTitle.setText("Edit Word");
+            dialog.setTitle("Edit Word");
         }
 
         addWordDialog.setOnClickListener(this);

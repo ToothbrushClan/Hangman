@@ -204,8 +204,8 @@ public class HangmanSQLiteHelper extends SQLiteOpenHelper {
 
     public void deleteQuestion(Question question){
         SQLiteDatabase db = this.getWritableDatabase();
-        String whereClause = COLUMN_CATEGORY + " = ? AND " + COLUMN_QUESTION + " = ?";
-        String[] whereArgs = {question.getCategory(),question.getQuestion()};
+        String whereClause = COLUMN_CATEGORY + " = ? AND " + COLUMN_QUESTION + " = ? AND " + COLUMN_ID + " = ?";
+        String[] whereArgs = {question.getCategory(),question.getQuestion(),String.valueOf(question.getId())};
         db.delete(TABLE_QUESTIONS, whereClause, whereArgs);
     }
 
