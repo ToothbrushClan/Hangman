@@ -8,9 +8,11 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.toothbrushclan.hangman.categories.Question;
@@ -26,13 +28,13 @@ public class CustomWordsActivity extends Activity implements View.OnClickListene
     Button addWordDialog;
     EditText question;
     EditText hint;
-    EditText difficulty;
+    Spinner difficulty;
     ListView customWordsList;
     CustomWordsBaseAdapter customWordsBaseAdapter;
     HangmanSQLiteHelper db;
     Dialog dialog;
     Question questionArg;
-    int maxCustomWords = 15;
+    int maxCustomWords = 50;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -90,13 +92,16 @@ public class CustomWordsActivity extends Activity implements View.OnClickListene
         addWordDialog.setBackgroundColor(Color.TRANSPARENT);
         question = (EditText) dialog.findViewById(R.id.questionEditText);
         hint = (EditText) dialog.findViewById(R.id.hintEditText);
-        difficulty = (EditText) dialog.findViewById(R.id.difficultyEditText);
+        difficulty = (Spinner) dialog.findViewById(R.id.spinnerDifficultyLevel);
+        String[] items = new String[]{"Easy", "Medium", "Hard", "Extreme"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, items);
+        difficulty.setAdapter(adapter);
         dialog.setTitle("Add Word");
 
         if ( questionArg != null ) {
             question.setText(questionArg.getQuestion());
             hint.setText(questionArg.getHint());
-            difficulty.setText(String.valueOf(questionArg.getDifficulty()));
+            difficulty.setSelection(questionArg.getDifficulty() - 1);
             addWordDialog.setText("Edit Word");
             dialog.setTitle("Edit Word");
         }
@@ -109,7 +114,7 @@ public class CustomWordsActivity extends Activity implements View.OnClickListene
         Question questionObject = new Question();
         questionObject.setQuestion(question.getText().toString().toLowerCase());
         questionObject.setHint(hint.getText().toString());
-        questionObject.setDifficulty(Integer.parseInt(difficulty.getText().toString()));
+        questionObject.setDifficulty(difficulty.getSelectedItemPosition() + 1);
         questionObject.setCategory(getResources().getString(R.string.custom));
         if ( questionArg != null ) {
             questionObject.setId(questionArg.getId());

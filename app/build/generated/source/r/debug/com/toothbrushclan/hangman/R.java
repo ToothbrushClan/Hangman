@@ -65,7 +65,6 @@ public final class R {
         public static final int customWordsLayout=0x7f0b002a;
         public static final int customWordsList=0x7f0b002b;
         public static final int customWordsRow=0x7f0b0050;
-        public static final int difficultyEditText=0x7f0b004d;
         public static final int empty=0x7f0b002c;
         public static final int enableHints=0x7f0b0042;
         public static final int hint=0x7f0b0008;
@@ -109,6 +108,7 @@ public final class R {
         public static final int settingsLayout2=0x7f0b0043;
         public static final int settingsTitle=0x7f0b0027;
         public static final int showHints=0x7f0b0041;
+        public static final int spinnerDifficultyLevel=0x7f0b004d;
         public static final int subLayout=0x7f0b0009;
         public static final int textSelectCategory=0x7f0b002d;
         public static final int textTitle=0x7f0b0045;
