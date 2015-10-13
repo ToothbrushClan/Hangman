@@ -58,14 +58,12 @@ public class CustomWordsBaseAdapter extends BaseAdapter {
 
     @Override
     public Question getItem(int position) {
-        // TODO understand more
         return this.questions[position];
     }
 
     @Override
     public long getItemId(int position) {
-        // TODO understand more
-        return position;
+        return this.questions[position].getId();
     }
 
     @Override
