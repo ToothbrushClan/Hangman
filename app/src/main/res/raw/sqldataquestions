@@ -5,7 +5,37 @@ animals;giraffe;Tallest Animal;1
 animals;penguin;Flightless Antarctic Bird;1
 animals;rabbit;Burrowing plant-eating Mammal;1
 animals;dog;Mans best friend;1
-animals;squirrel;Agile tree-dwelling Rodent;1
+animals;squirrel;Agile tree-dwelling Rodent;2
+animals;jaguar;Largest feline on the American continent;2
+animals;jellyfish;Boneless animals that float freely in oceans;2
+animals;kiwi;Brown, fuzzy, flightless bird in New Zealand;2
+animals;koala;Cute small grey bear type mammal;1
+animals;royal bengal tiger;National animal of India;2
+animals;eagle;Predator bird;1
+animals;hippopotamus;Large herbivorous mammal;2
+animals;emu;Australian bird;1
+animals;lion;Big cat;1
+animals;giant panda;Chinese bear;2
+animals;gorilla;Large herbivorous apes;2
+animals;blue whale;Largest mammal;1
+animals;dolphin;Intelligent marine mammal;2
+animals;zebra;Black and white stripes;1
+animals;coyote;North American wolf;3
+animals;mallard;Swimming bird;3
+animals;flamingo;Pink bird;1
+animals;hammerhead shark;Flatheaded predatory fish;2
+animals;quokka;Happiest animal;3
+animals;alpaca;South American camel;2
+animals;dingo;Australian dog;2
+animals;red panda;Eastern Himalayan mammal;3
+animals;meerkat;Timon;2
+animals;weasel;European polecat;3
+animals;hamster;Pet rodent;2
+animals;hedgehog;Spiny mammal;2
+animals;skunk;Mammals with a strong odour;2
+animals;rhinoceros;Endangered horned animal;2
+animals;cockatoo;Australian parrot;2
+animals;honey badger;Most Fearless Animal;3
 cars;lamborghini;Italian Car company with Bull Logo;1
 cars;bmw;Famous car company from Bavaria, Germany;1
 cars;toyota;Company building the Land Cruiser;1
@@ -24,6 +54,36 @@ dictionary;garden;An outdoor area containing one or more types of plants;1
 dictionary;dust;A single particle of earth;1
 dictionary;education;The process or art of imparting knowledge;1
 food;pizza;A dish of Italian origin;1
+food;roti;Indian flatbread;1
+food;idli;South Indian breakfast;1
+food;couscous;North African semolina dish;3
+food;tagine;North African dish named after the pot;3
+food;pasta;Eaten with a sauce;2
+food;sachertorte;Chocolate cake invented in Austria;3
+food;chocolate;Made from cacao seeds;2
+food;dumplings;Steamed Asian food;2
+food;hamburger;Patty and salad in a bun;2
+food;sandwich;Named after an Earl;2
+food;salami;Cured sausage;3
+food;falafel;Deep fried chickpeas;2
+food;hakka noodles;Popular Indo-Chinese dish;2
+food;dal;Indian staple food;1
+food;lasagne;Layered Italian dish;2
+food;meatballs;Rolled up mince meat;2
+food;pav wada;Popular Pune street food;1
+food;butter chicken;Indian curry developed in Delhi;2
+food;doughnut;Sweet fried dough;2
+food;panna cotta;Italian cream thickened with gelatin;3
+food;caramel;Heated sugar;2
+food;meringue;Whipped egg whites;3
+food;macaron;French egg based confection;3
+food;nachos;Tortilla chips;2
+food;hummus;Middle Eastern dip from chickpeas;2
+food;cookie;Sweet American biscuit;1
+food;sushi;Popular Japanese food;1
+food;pancake; Sweet egg and flour batter;2
+food;ice cream;Sweet frozen food;1
+food;kitkat;Have a break;2
 kids;Cinderella;Someone who lost a glass slipper;1
 kids;Tinker Bell;Peter Pans friend;1
 kids;Mickey Mouse;Plutos owner;1
