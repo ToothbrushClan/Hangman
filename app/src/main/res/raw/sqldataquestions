@@ -86,6 +86,67 @@ food;sushi;Popular Japanese food;1
 food;pancake; Sweet egg and flour batter;2
 food;ice cream;Sweet frozen food;1
 food;kitkat;Have a break;2
+food;roulade;Filled and rolled cake;3
+food;schnitzel;Fried dish from Germany;2
+food;paratha;Indian flatbread with savoury fillings;1
+food;paneer;Cottage cheese;1
+food;churro;Spanish fried dough pastry;2
+food;dulce de leche; Sweetened and caramelized milk;3
+food;babka;Polish yeast cake;3
+food;baklava;Sweet Turkish pastry filled with nuts;3
+food;popcorn;Movie food;2
+food;cotton candy;Spun sugar;1
+food;lollipop;Hard candy on a stick;1
+food;crepe;French pancake;3
+food;gingerbread;Baked Christmas special;2
+food;empanada;Spanish stuffed pastry;3
+food;samosa;Indian stuffed and fried pastry;2
+food;biryani;Popular Mughlai rice dish;1
+food;jalebi;Fried Indian sweet, orange in colour;1
+food;rasgulla;white, syrupy dessert from Bengal;1
+food;kulfi;Frozen dairy dessert from India;2
+food;kheer;Rice pudding from India;2
+food;biscotti;Twice baked Italian biscuit;2
+food;baguette;Popular French bread;2
+food;quiche;Savoury pastry from France;3
+history;Napoleon Bonaparte;French leader known for being short;1
+history;Mahatma Gandhi;Father of the Indian nation;1
+history;Jawaharlal Nehru;First Prime Minister of India;1
+history;Alexander The Great;Macedonian king;2
+history;Mein Kampf;Hitler's autobigraphy;2
+history;Communist Manifesto;Political book by Marx and Engels;3
+history;Vladimir Lenin;Leader of the Russian Revolution;2
+history;Franz Ferdinand;Austrian Archduke whose death led to WW1;3
+history;Hiroshima;Bombed on 6th August 1945;2
+history;Homo Sapien;Speies to which modern humans belong;2
+history;Palaeolithic Age;Old Stone Age;2
+history;Mesolithic Age;Middle Stone Age;2
+history;Neolithic Age;New Stone Age;2
+history;Chalcolithic Age;Copper Age;2
+history;Mesopotamia;Oldest civilization along the Tigris;2
+history;Constantinople;Capital of the Byzantine Empire;2
+history;George Washington;First President of USA;1
+history;Code of Hammurabi;Oldest, deciphered, Babylonian law;3
+history;Cleopatra;Last Pharaoh of Ptolemaic Egypt;2
+history;Tutankhamun;Young Pharaoh with a well preserved tomb;3
+history;Howard Carter;English archaeologist who discovered a Pharaoh's tomb;3
+history;Otzi;Europe's oldest human mummy;3
+history;Henry viii;English king with 6 wives;3
+history;Marie Antoinette;Last Queen of France;3
+history;Miracle of Dunkirk;Evacuation of British forces from France in 1940;3
+history;Allan Octavian Hume;Founder of Indian National Congress;2
+history;Julius Caesar;Famous Roman Politician;1
+history;Christopher Columbus;Explorer who discovered America;1
+history;Vasco Da Gama;Portuguese explorer who discovered the first sea route to India;1
+history;Titanic;Collided with an iceberg;1
+history;William the Conquerer;First Norman King of England;2
+history;Bastille;Famous French Prison;1
+history;Boston Tea Party;Political protest by colonists in America;1
+history;Martin Luther King Jr;"I have a dream";1
+history;Neil Armstrong;First man on the moon;1
+history;Buzz Aldrin;Second man to walk on the moon;1
+history;Yuri Gagarin;First man in space;1
+history;Magna Carta;Most famous charter to safeguard rights;2
 kids;Cinderella;Someone who lost a glass slipper;1
 kids;Tinker Bell;Peter Pans friend;1
 kids;Mickey Mouse;Plutos owner;1
@@ -96,5 +157,65 @@ kids;Woody;Andys favorite Toy;1
 kids;Snow White;Lived with dwarves;1
 kids;Mike Wazowski;One eyed green monster;1
 kids;Buzz Lightyear;Woodys best friend;1
+places;New Delhi;Capital of India;1
+places;Paris;Capital of France;1
+places;Washington DC;Capital of USA;1
+places;London;Capital of UK;1
+places;Times Square;Commercial neighbourhood in New York;2
+places;champs elysees;Most famous avenue in Paris;2
+places;India Gate;War memorial situated in Delhi;2
+places;Ajanta;Buddhist cave monuments in India;2
+places;Merlion;Famous structure that personifies Singapore;2
+places;Tower of London;Historic castle along the River Thames;2
+places;Neuschwanstein;Castle in Bavaria, Germany that inspired Disney;3
+places;Taj Mahal;Marble mausoleum built by Shah Jahan;1
+places;Great Pyramid of Giza;Ancient burial structure in Egypt;1
+places;Great Sphinx;Egyptian structure with the head of a man and body of a lion;1
+places;Kuala Lumpur;Capital of Malaysia;1
+places;Canberra;Capital of Australia;2
+places;Sydney Opera House;Performance arts centre in Australia;2
+places;Burj Khalifa;Tallest structure in the world;1
+places;Petronas Towers;Tallest structure in Malaysia;2
+places;Empire State Building;Famous skyscraper in Manhattan;2
+places;Eiffel Tower;Famous structure in Paris;1
+places;Vatican City;Smallest country in the world;2
+places;Russia;Largest country in the world;1
+places;Central Park;Urban park in Manhattan;2
+places;Cape Town;Capital of South Africa;1
+places;Florence;Home of the Renaissance;2
+places;Tokyo;Capital of Japan;1
+places;Maui;Famous Hawaiian island;3
+places;Golden Gate Bridge;Suspension bridge in San Francisco;2
+places;Statue of Liberty;Famous sculpture in New York;1
+places;Spring Temple Buddha;Largest statue in the world;3
+places;Grand Canyon;Famous National Park in Arizona, USA;2
+places;Himalaya;Mountain range with the world's highest peaks;1
+places;Mount Etna;Europe's biggest and most active volcano;3
 space;Milky Way;Our Galaxy;1
+space;Sirius;Brightest star in Earth's night sky;2
+space;Titan;Saturn's largest moon;2
+space;Jupiter;Largest planet in our Solar system;1
+space;Andromeda;Nearest Galaxy to the Milky Way;2
+space;Halley Comet;Visible from Earth every 75 years;2
+space;Pluto;Dwarf Planet in the Solar system;1
+space;Mangalyaan;India's Mars Orbiter Mission;2
 sports;football;A sport played on foot in which teams attempt to get a ball into a goal;1
+sports;baseball;American bat and ball game;1
+sports;basketball;Sport in which teams attempt to shoot a ball through a hoop;1
+sports;cricket;Bat and ball game that originated in England;1
+sports;badminton;Sport using a shuttlecock and a racquet;1
+sports;tennis;Racket and ball game that originated in France;1
+sports;hockey;Indian national sport;1
+sports;lacrosse;Team sport played with a ball and long handled netted sticks;2
+sports;Table tennis;Indoor sport played with a light weight ball and small bats;2
+sports;Diego Maradona;Famous Argentinian Footballer;2
+sports;Roger Federer;Swiss tennis player;1
+sports;Rafael Nadal;Spanish tennis player;1
+sports;Ronaldo;Famous Brazilian footballer;1
+sports;Pele;Legendary Brazilian footballer;1
+sports;Zinedine Zidane;Famous French footballer;1
+sports;Liverpool FC;English Premier League football club from Merseyside;2
+sports;Sachin Tendulkar;Regarded as the greatest batsman of all time;1
+sports;Don Bradman;Legendary Australian cricketer;1
+sports;FIFA;International governing body of Football;1
+sports;Olympics;International sporting event that originated in Greece;1
