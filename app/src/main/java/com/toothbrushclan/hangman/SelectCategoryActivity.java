@@ -61,7 +61,7 @@ public class SelectCategoryActivity extends Activity implements View.OnClickList
     public void onClick(View v) {
         Button buttonTemp = (Button) v;
         String category = (String) buttonTemp.getText();
-        Intent categoryIntent = new Intent(this, HangmanActivity.class);
+        Intent categoryIntent = new Intent(this, SelectDifficultyActivity.class);
         categoryIntent.putExtra("categoryType", category);
         startActivity(categoryIntent);
     }

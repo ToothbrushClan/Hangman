@@ -121,7 +121,7 @@ public class CustomWordsActivity extends Activity implements View.OnClickListene
             questionObject.setCategory(questionArg.getCategory());
             db.editQuestion(questionObject);
         } else {
-            db.addQuestion(questionObject);
+            db.addCustomQuestion(questionObject);
         }
         updateAdapter();
         customWordsBaseAdapter.notifyDataSetChanged();

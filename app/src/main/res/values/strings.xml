@@ -7,6 +7,9 @@
 
     <string name="showHints">Show Hints?</string>
     <string name="customWords">Custom Words</string>
+    <string name="uploadQuestions">Upload Questions</string>
+    <string name="upload">Upload</string>
+    <string name="reset">Reset</string>
     <string name="manage">Manage</string>
     <string name="addCustomWord">Add Word</string>
     <string name="emptyListText">Please click on Add Word</string>
@@ -34,6 +37,12 @@
     <string name="categoryDictionary">Dictionary</string>
     <string name="categoryRandom">Random</string>
     <string name="categoryCustom">Custom</string>
+
+    <string name="selectDifficulty">Select a Difficulty: </string>
+    <string name="difficultyEasy">Easy</string>
+    <string name="difficultyMedium">Medium</string>
+    <string name="difficultyHard">Hard</string>
+    <string name="difficultyExtreme">Extreme</string>
 
     <string name="kids">kids</string>
     <string name="cars">cars</string>

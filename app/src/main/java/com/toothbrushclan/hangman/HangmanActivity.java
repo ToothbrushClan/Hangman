@@ -77,6 +77,7 @@ public class HangmanActivity extends Activity implements View.OnClickListener, F
     int questionCount = 0;
     int perfectAnswerCount = 0;
     int hintsUsedCount = 0;
+    int difficulty;
     int defaultTextColor;
     int score;
 
@@ -90,6 +91,7 @@ public class HangmanActivity extends Activity implements View.OnClickListener, F
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             categoryType = bundle.getString("categoryType");
+            difficulty = bundle.getInt("difficultyId", 1);
         }
         init();
     }
@@ -155,7 +157,7 @@ public class HangmanActivity extends Activity implements View.OnClickListener, F
             default :
                 categoryCode = "random";
         }
-        categoryObject = new Category(super.getApplicationContext(), categoryCode, 1);
+        categoryObject = new Category(super.getApplicationContext(), categoryCode, difficulty);
     }
 
     private void getNextQuestion() {

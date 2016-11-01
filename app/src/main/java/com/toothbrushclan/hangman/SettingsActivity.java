@@ -19,6 +19,7 @@ public class SettingsActivity extends Activity implements View.OnClickListener{
     Settings settings;
     Switch showHintsSwitch;
     Button addCustomWords;
+    Button uploadQuestions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -32,6 +33,8 @@ public class SettingsActivity extends Activity implements View.OnClickListener{
         showHintsSwitch = (Switch) findViewById(R.id.enableHints);
         addCustomWords = (Button) findViewById(R.id.addCustomWords);
         addCustomWords.setOnClickListener(this);
+        uploadQuestions = (Button) findViewById(R.id.uploadQuestions);
+        uploadQuestions.setOnClickListener(this);
         if (settings.getSetting(getResources().getString(R.string.dbShowHints)).equals(getResources().getString(R.string.dbTrue))) {
             showHintsSwitch.setChecked(true);
         } else {
@@ -56,6 +59,8 @@ public class SettingsActivity extends Activity implements View.OnClickListener{
             case R.id.addCustomWords :
                 Intent addCustomWordsIntent = new Intent(this, CustomWordsActivity.class);
                 startActivity(addCustomWordsIntent);
+                break;
+            case R.id.uploadQuestions :
                 break;
         }
     }
