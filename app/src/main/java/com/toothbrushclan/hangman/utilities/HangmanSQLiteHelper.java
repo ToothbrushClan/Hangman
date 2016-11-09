@@ -126,15 +126,13 @@ public class HangmanSQLiteHelper extends SQLiteOpenHelper {
 
     public Map<String, Map<String, String>> getQuestionMap(String category, int difficulty){
         SQLiteDatabase db = this.getReadableDatabase();
-        String whereClause = Constants.COLUMN_CATEGORY + " = ? AND " + Constants.COLUMN_DIFFICULTY + " = " + difficulty;
-        String[] whereArgs = {category};
+        String whereClause = Constants.COLUMN_CATEGORY + " = \'" + category + "\' AND " + Constants.COLUMN_DIFFICULTY + " = " + difficulty;
         if ( category.equals("random")) {
-            whereClause = Constants.COLUMN_CATEGORY + " like ? AND " + Constants.COLUMN_DIFFICULTY + " = " + difficulty;
-            whereArgs = new String[]{"%",String.valueOf(difficulty)};
+            whereClause = Constants.COLUMN_CATEGORY + " like \'%\' AND " + Constants.COLUMN_DIFFICULTY + " = " + difficulty;
         }
         Cursor cursor = db.query(Constants.TABLE_QUESTIONS,
                 new String[]{Constants.COLUMN_CATEGORY, Constants.COLUMN_QUESTION, Constants.COLUMN_HINT},
-                whereClause, whereArgs,
+                whereClause, null,
                 null, null, Constants.COLUMN_CATEGORY);
 
         Map<String, Map<String, String>> categoryMap = new HashMap<>();
