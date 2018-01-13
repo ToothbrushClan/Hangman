@@ -32,8 +32,10 @@ public class HangmanSQLiteHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         createQuestionsTable(db);
+        createCategoryTable(db);
         createSettingsTable(db);
         loadData(db);
+        loadCategory(db);
         loadSettings(db);
     }
 
@@ -41,9 +43,12 @@ public class HangmanSQLiteHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // TODO: Handle upgrade for questions. Should not wipe out custom questions
         db.execSQL("DROP TABLE IF EXISTS " + Constants.TABLE_QUESTIONS);
+        db.execSQL("DROP TABLE IF EXISTS " + Constants.TABLE_CATEGORY);
         // db.execSQL("DROP TABLE IF EXISTS " + Constants.TABLE_SETTINGS);
         createQuestionsTable(db);
+        createCategoryTable(db);
         loadData(db);
+        loadCategory(db);
     }
 
     public void createQuestionsTable (SQLiteDatabase db) {
@@ -53,8 +58,17 @@ public class HangmanSQLiteHelper extends SQLiteOpenHelper {
                 Constants.COLUMN_CATEGORY + " TEXT, " +
                 Constants.COLUMN_QUESTION + " TEXT, " +
                 Constants.COLUMN_HINT + " TEXT, " +
-                Constants.COLUMN_DIFFICULTY + " INTEGER )";
+                Constants.COLUMN_DIFFICULTY + " INTEGER, " +
+                Constants.COLUMN_IS_CUSTOM_WORD + " TEXT )";
         db.execSQL(CREATE_QUESTIONS_TABLE);
+    }
+
+    public void createCategoryTable (SQLiteDatabase db) {
+        String CREATE_CATEGORY_TABLE = "CREATE TABLE "
+                + Constants.TABLE_CATEGORY + " ( " +
+                Constants.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                Constants.COLUMN_CATEGORY + " TEXT )";
+        db.execSQL(CREATE_CATEGORY_TABLE);
     }
 
     public void createSettingsTable (SQLiteDatabase db) {
@@ -95,7 +109,17 @@ public class HangmanSQLiteHelper extends SQLiteOpenHelper {
             insertQuestionValues.put(Constants.COLUMN_QUESTION, questionArray[1]);
             insertQuestionValues.put(Constants.COLUMN_HINT, questionArray[2]);
             insertQuestionValues.put(Constants.COLUMN_DIFFICULTY, Integer.parseInt(questionArray[3]));
+            insertQuestionValues.put(Constants.COLUMN_IS_CUSTOM_WORD, "false");
             db.insert(Constants.TABLE_QUESTIONS, null, insertQuestionValues);
+        }
+    }
+
+    private void loadCategory(SQLiteDatabase db) {
+        List<String> categoryList = readFile("raw/category");
+        for ( String category : categoryList ) {
+            ContentValues insertCategoryValues = new ContentValues();
+            insertCategoryValues.put(Constants.COLUMN_CATEGORY, category);
+            db.insert(Constants.TABLE_CATEGORY, null, insertCategoryValues);
         }
     }
 
@@ -199,6 +223,38 @@ public class HangmanSQLiteHelper extends SQLiteOpenHelper {
         return questions;
     }
 
+    public Question[] getQuestions(boolean isCustomWord){
+        Question[] questions;
+        int questionCount = 0;
+        SQLiteDatabase db = this.getReadableDatabase();
+        String whereClause = Constants.COLUMN_IS_CUSTOM_WORD + " = ?";
+        String[] whereArgs = {String.valueOf(isCustomWord)};
+        Cursor cursor = db.query(Constants.TABLE_QUESTIONS,
+                new String[]{Constants.COLUMN_ID, Constants.COLUMN_CATEGORY, Constants.COLUMN_QUESTION, Constants.COLUMN_HINT, Constants.COLUMN_DIFFICULTY, Constants.COLUMN_IS_CUSTOM_WORD},
+                whereClause, whereArgs,
+                null, null, Constants.COLUMN_CATEGORY);
+
+        if (cursor.getCount() > 0) {
+            questions = new Question[cursor.getCount()];
+        } else {
+            return null;
+        }
+
+        if (cursor.moveToFirst()) {
+            do {
+                int id = cursor.getInt(cursor.getColumnIndex(Constants.COLUMN_ID));
+                int difficulty = cursor.getInt(cursor.getColumnIndex(Constants.COLUMN_DIFFICULTY));
+                String category = cursor.getString(cursor.getColumnIndex(Constants.COLUMN_CATEGORY));
+                String question = cursor.getString(cursor.getColumnIndex(Constants.COLUMN_QUESTION));
+                String hint = cursor.getString(cursor.getColumnIndex(Constants.COLUMN_HINT));
+
+                questions[questionCount] = new Question(id, difficulty, category, question, hint);
+                questionCount++;
+            }while ( cursor.moveToNext() );
+        }
+        return questions;
+    }
+
     public void addQuestion(Question question){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues insertQuestionValues = new ContentValues();
@@ -206,6 +262,7 @@ public class HangmanSQLiteHelper extends SQLiteOpenHelper {
         insertQuestionValues.put(Constants.COLUMN_QUESTION, question.getQuestion());
         insertQuestionValues.put(Constants.COLUMN_HINT, question.getHint());
         insertQuestionValues.put(Constants.COLUMN_DIFFICULTY, question.getDifficulty());
+        insertQuestionValues.put(Constants.COLUMN_IS_CUSTOM_WORD, String.valueOf(question.getIsCustomWord()));
         db.insert(Constants.TABLE_QUESTIONS, null, insertQuestionValues);
     }
 
@@ -216,17 +273,19 @@ public class HangmanSQLiteHelper extends SQLiteOpenHelper {
         insertQuestionValues.put(Constants.COLUMN_QUESTION, question.getQuestion());
         insertQuestionValues.put(Constants.COLUMN_HINT, question.getHint());
         insertQuestionValues.put(Constants.COLUMN_DIFFICULTY, question.getDifficulty());
+        insertQuestionValues.put(Constants.COLUMN_IS_CUSTOM_WORD, String.valueOf(question.getIsCustomWord()));
         db.insert(Constants.TABLE_QUESTIONS, null, insertQuestionValues);
     }
 
     public void editQuestion(Question question){
         SQLiteDatabase db = this.getWritableDatabase();
-        String whereClause = Constants.COLUMN_CATEGORY + " = ? AND " + Constants.COLUMN_ID + " = ?";
-        String[] whereArgs = {question.getCategory(), String.valueOf(question.getId())};
+        String whereClause = Constants.COLUMN_ID + " = ?";
+        String[] whereArgs = {String.valueOf(question.getId())};
         ContentValues updateQuestionValues = new ContentValues();
         updateQuestionValues.put(Constants.COLUMN_QUESTION, question.getQuestion());
         updateQuestionValues.put(Constants.COLUMN_HINT, question.getHint());
         updateQuestionValues.put(Constants.COLUMN_DIFFICULTY, question.getDifficulty());
+        updateQuestionValues.put(Constants.COLUMN_CATEGORY, question.getCategory());
         db.update(Constants.TABLE_QUESTIONS, updateQuestionValues, whereClause, whereArgs);
     }
 
@@ -235,6 +294,22 @@ public class HangmanSQLiteHelper extends SQLiteOpenHelper {
         String whereClause = Constants.COLUMN_CATEGORY + " = ? AND " + Constants.COLUMN_QUESTION + " = ? AND " + Constants.COLUMN_ID + " = ?";
         String[] whereArgs = {question.getCategory(),question.getQuestion(),String.valueOf(question.getId())};
         db.delete(Constants.TABLE_QUESTIONS, whereClause, whereArgs);
+    }
+
+    public ArrayList<String> getCategories () {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(Constants.TABLE_CATEGORY,
+                new String[]{Constants.COLUMN_CATEGORY},
+                null, null,
+                null, null, null);
+        if (cursor.moveToFirst()) {
+            ArrayList<String> categoryList = new ArrayList<String>();
+            do {
+                categoryList.add(cursor.getString(cursor.getColumnIndex(Constants.COLUMN_CATEGORY)).toUpperCase());
+            }while ( cursor.moveToNext() );
+            return categoryList;
+        }
+        return null;
     }
 
     public String getSetting (String settingName) {

@@ -100,11 +100,39 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/addWordsLayout4"
+        android:id="@+id/addWordsLayout5"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_below="@+id/addWordsLayout3"
+        android:padding="1dp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:textSize="15dp"
+            android:paddingLeft="24dp"
+            android:text="@string/category"/>
+
+        <Spinner
+            android:id="@+id/spinnerCategory"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:background="@android:drawable/btn_dropdown"
+            style="@android:style/Widget.Spinner"
+            android:spinnerMode="dropdown" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/addWordsLayout4"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@+id/addWordsLayout5"
         android:padding="1dp" >
 
         <Button

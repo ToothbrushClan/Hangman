@@ -19,6 +19,9 @@ import com.toothbrushclan.hangman.categories.Question;
 import com.toothbrushclan.hangman.utilities.CustomWordsBaseAdapter;
 import com.toothbrushclan.hangman.utilities.HangmanSQLiteHelper;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 /**
  * Created by ushaikh on 07/10/15.
  */
@@ -29,6 +32,7 @@ public class CustomWordsActivity extends Activity implements View.OnClickListene
     EditText question;
     EditText hint;
     Spinner difficulty;
+    Spinner selectCategory;
     ListView customWordsList;
     CustomWordsBaseAdapter customWordsBaseAdapter;
     HangmanSQLiteHelper db;
@@ -45,7 +49,7 @@ public class CustomWordsActivity extends Activity implements View.OnClickListene
 
     private void init() {
         db = new HangmanSQLiteHelper(this);
-        Question[] questions = db.getQuestions(getResources().getString(R.string.custom));
+        Question[] questions = db.getQuestions(true);
         customWordsBaseAdapter = new CustomWordsBaseAdapter(this, getLayoutInflater(), questions);
         customWordsBaseAdapter.setCustomButtonListener(this);
         customWordsList = (ListView) findViewById(R.id.customWordsList);
@@ -61,8 +65,8 @@ public class CustomWordsActivity extends Activity implements View.OnClickListene
     }
 
     private void updateAdapter() {
-        Question[] questions = db.getQuestions(getResources().getString(R.string.custom));
-        customWordsBaseAdapter.updateDate(questions);
+        Question[] questions = db.getQuestions(true);
+        customWordsBaseAdapter.updateData(questions);
         if ( customWordsBaseAdapter.getCount() >= maxCustomWords ) {
             addWord.setEnabled(false);
         } else {
@@ -93,15 +97,21 @@ public class CustomWordsActivity extends Activity implements View.OnClickListene
         question = (EditText) dialog.findViewById(R.id.questionEditText);
         hint = (EditText) dialog.findViewById(R.id.hintEditText);
         difficulty = (Spinner) dialog.findViewById(R.id.spinnerDifficultyLevel);
+        selectCategory = (Spinner) dialog.findViewById(R.id.spinnerCategory);
         String[] items = new String[]{"Easy", "Medium", "Hard", "Extreme"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, items);
         difficulty.setAdapter(adapter);
+        ArrayList<String> categoryList = db.getCategories();
+        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, categoryList);
+        selectCategory.setAdapter(categoryAdapter);
         dialog.setTitle("Add Word");
 
         if ( questionArg != null ) {
             question.setText(questionArg.getQuestion());
             hint.setText(questionArg.getHint());
             difficulty.setSelection(questionArg.getDifficulty() - 1);
+            int selectCategoryPosition = categoryAdapter.getPosition(questionArg.getCategory().toUpperCase());
+            selectCategory.setSelection(selectCategoryPosition);
             addWordDialog.setText("Edit Word");
             dialog.setTitle("Edit Word");
         }
@@ -115,13 +125,14 @@ public class CustomWordsActivity extends Activity implements View.OnClickListene
         questionObject.setQuestion(question.getText().toString().toLowerCase());
         questionObject.setHint(hint.getText().toString());
         questionObject.setDifficulty(difficulty.getSelectedItemPosition() + 1);
-        questionObject.setCategory(getResources().getString(R.string.custom));
+        questionObject.setCategory(selectCategory.getSelectedItem().toString().toLowerCase());
+        questionObject.setIsCustomWord(true);
+        // questionObject.setCategory(getResources().getString(R.string.custom));
         if ( questionArg != null ) {
             questionObject.setId(questionArg.getId());
-            questionObject.setCategory(questionArg.getCategory());
             db.editQuestion(questionObject);
         } else {
-            db.addCustomQuestion(questionObject);
+            db.addQuestion(questionObject);
         }
         updateAdapter();
         customWordsBaseAdapter.notifyDataSetChanged();

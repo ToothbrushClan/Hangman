@@ -8,6 +8,7 @@ public class Constants {
 
     public static final String DATABASE_NAME = "HangmanDb";
     public static final String TABLE_QUESTIONS = "questions";
+    public static final String TABLE_CATEGORY = "category";
     public static final String TABLE_SETTINGS = "settings";
     public static final String TABLE_STATISTICS = "statistics";
     public static final String TABLE_USERS = "users";
@@ -17,6 +18,7 @@ public class Constants {
     public static final String COLUMN_QUESTION = "question";
     public static final String COLUMN_HINT = "hint";
     public static final String COLUMN_DIFFICULTY = "difficulty";
+    public static final String COLUMN_IS_CUSTOM_WORD = "iscustomword";
     public static final String COLUMN_NAME = "name";
     public static final String COLUMN_VALUE = "value";
     public static final String COLUMN_USER_ID = "userid";

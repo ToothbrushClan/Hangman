@@ -43,7 +43,7 @@ public class CustomWordsBaseAdapter extends BaseAdapter {
         Button buttonDelete;
     }
 
-    public void updateDate(Question[] questions) {
+    public void updateData(Question[] questions) {
         this.questions = questions;
     }
 

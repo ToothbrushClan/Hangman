@@ -9,6 +9,7 @@ public class Question {
     private String category;
     private String question;
     private String hint;
+    private boolean isCustomWord = false;
 
     public Question () {
 
@@ -20,6 +21,15 @@ public class Question {
         this.category = category;
         this.question = question;
         this.hint = hint;
+    }
+
+    public Question (int id, int difficulty, String category, String question, String hint, boolean isCustomWord) {
+        this.id = id;
+        this.difficulty = difficulty;
+        this.category = category;
+        this.question = question;
+        this.hint = hint;
+        this.isCustomWord = isCustomWord;
     }
 
     public int getId () {
@@ -42,6 +52,10 @@ public class Question {
         return this.hint;
     }
 
+    public boolean getIsCustomWord () {
+        return this.isCustomWord;
+    }
+
     public void setId (int id) {
         this.id = id;
     }
@@ -60,6 +74,10 @@ public class Question {
 
     public void setHint (String hint) {
         this.hint = hint;
+    }
+
+    public void setIsCustomWord (boolean isCustomWord) {
+        this.isCustomWord = isCustomWord;
     }
 
 }
